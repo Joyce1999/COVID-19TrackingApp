@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/container"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".ui.home.HomeFragment">
+
+<TextView
+    android:id="@+id/text_home"
+    android:layout_centerHorizontal="true"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:textSize="35dp"
+    android:text="Home"
+    />
+
+<TextView
+    android:id="@+id/explanation"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/text_home"
+    android:layout_margin="16dp"
+    android:textSize="20dp"
+    android:text="Here is a description of what the application is supposed to do!"
+    />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_below="@id/explanation"
+        tools:context="mobi.garden.bottomnavigationtest.HomeActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="The purpose of our application is to be able to monitor the position of a person via their phone in relation to another to help abide by social distancing
+protocals and recommendations. Should a person exceed anothers personal boundary, both parties involved will be notified and recommended to sustain a safe distance. Should a person be exposed
+to COVID-19 then all persons that may have come in contact will be notified immediately via the app. All personal data will be anonymised, however, may feature as an overall statistic for the purposes
+of displaying data.\n \nThe application itself also features displayable statistics of the current COVID-19 crisis, related news, personal health data, and a check in feature that will allow users to
+input their current health state. \n \nUsers should also be able to modify their settings and also opt to pair with other users that are within their social circle to avoid any unnecessary alerts should both persons use the app." />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="308dp"
+        android:layout_height="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="262dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/title_author" />
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1066990901503",
+    "project_id": "ca3326-e178b",
+    "storage_bucket": "ca3326-e178b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066990901503:android:84c535cc4a3c562ea754ca",
+        "android_client_info": {
+          "package_name": "com.example.ca326drawer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066990901503-l08br6f5mbha24eqdd5i0eov0r2u0iss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56GLBsMHYBINP17r1DLtST5GgAm3-9o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066990901503-l08br6f5mbha24eqdd5i0eov0r2u0iss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
