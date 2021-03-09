@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.CA326MyBubble.BuildConfig;
 import com.CA326MyBubble.controllers.AppController;
-import com.CA326MyBubble.utils.AppUtils;
-import com.CA326MyBubble.model.NewsResponseWrapper;
+import com.CA326MyBubble.utils.Utilities;
+import com.CA326MyBubble.model.NewsList;
 import com.CA326MyBubble.service.Retrofit.RestApiResponse;
 import com.CA326MyBubble.service.Retrofit.RestApiServiceNews;
 import com.CA326MyBubble.service.Retrofit.RetrofitInstanceNews;
@@ -33,23 +33,23 @@ public class NewsRepository {
         RestApiServiceNews endpoint = RetrofitInstanceNews.getRetrofitServiceNews();
 
         String code = AppController.getInstance().getCode();
-        Call<NewsResponseWrapper> call;
+        Call<NewsList> call;
         if (isGetAll) {
             call = endpoint.getNews(code, "health", BuildConfig.API_NEWS);
         } else {
             if (code.equals("")) {
-                call = endpoint.getNewsAll(AppUtils.getLanguage(), "health", BuildConfig.API_NEWS);
+                call = endpoint.getNewsAll(Utilities.getLanguage(), "health", BuildConfig.API_NEWS);
             } else {
                 call = endpoint.getNews(code, "health", BuildConfig.API_NEWS);
             }
         }
-        call.enqueue(new Callback<NewsResponseWrapper>() {
+        call.enqueue(new Callback<NewsList>() {
             @Override
-            public void onResponse(@NonNull Call<NewsResponseWrapper> call, @NonNull Response<NewsResponseWrapper> response) {
+            public void onResponse(@NonNull Call<NewsList> call, @NonNull Response<NewsList> response) {
 
                 if(response.isSuccessful())
                 {
-                    NewsResponseWrapper newsResponse =  response.body();
+                    NewsList newsResponse =  response.body();
                     if (newsResponse != null  && newsResponse.getArticles() != null) {
                         liveData.postValue(new RestApiResponse(newsResponse.getArticles()));
                     }
@@ -58,7 +58,7 @@ public class NewsRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<NewsResponseWrapper> call, Throwable t) {
+            public void onFailure(@NonNull Call<NewsList> call, Throwable t) {
 
                 liveData.postValue(new RestApiResponse(t));
 

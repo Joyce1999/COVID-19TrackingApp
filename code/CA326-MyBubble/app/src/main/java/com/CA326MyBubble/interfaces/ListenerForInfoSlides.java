@@ -1,6 +1,6 @@
 package com.CA326MyBubble.interfaces;
 
 
-public interface OnFragmentListenerSlider {
+public interface ListenerForInfoSlides {
     void doOnBackPressed();
 }

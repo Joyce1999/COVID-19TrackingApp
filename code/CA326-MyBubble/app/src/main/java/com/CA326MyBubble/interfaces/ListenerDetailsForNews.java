@@ -1,6 +1,6 @@
 package com.CA326MyBubble.interfaces;
 
 
-public interface OnFragmentListenerNewsDetail {
+public interface ListenerDetailsForNews {
     void webIntent(String url);
 }

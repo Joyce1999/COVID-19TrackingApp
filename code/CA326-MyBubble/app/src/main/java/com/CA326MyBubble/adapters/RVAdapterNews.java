@@ -10,28 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.CA326MyBubble.model.newsModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.model.News;
 
 
-public class RecyclerViewAdapterNews extends RecyclerView.Adapter<RecyclerViewAdapterNews.ViewHolder>{
+public class RVAdapterNews extends RecyclerView.Adapter<RVAdapterNews.ViewHolder>{
 
-  private List<News> mValues = new ArrayList<>();
+  private List<newsModel> mValues = new ArrayList<>();
 
     private Context mContext;
 
 
-    public RecyclerViewAdapterNews(Context context) {
+    public RVAdapterNews(Context context) {
 
         mContext = context;
 
     }
-    public List<News> getNews() {
+    public List<newsModel> getNews() {
         return mValues;
     }
     public class ViewHolder extends RecyclerView.ViewHolder  {
@@ -40,7 +40,7 @@ public class RecyclerViewAdapterNews extends RecyclerView.Adapter<RecyclerViewAd
          TextView tvSource;
          ImageView imageNews;
 
-        News item;
+        newsModel item;
 
         public ViewHolder(View v) {
 
@@ -52,27 +52,27 @@ public class RecyclerViewAdapterNews extends RecyclerView.Adapter<RecyclerViewAd
 
         }
 
-        public void setData(News item) {
+        public void setData(newsModel item) {
             this.item = item;
             Glide.with(mContext)
-                    .load(item.getUrlToImage())
+                    .load(item.getImageURL())
                     .into(imageNews);
-            tvTitle.setText(item.getTitle());
-            tvSource.setText(item.getSource().getName());
+            tvTitle.setText(item.getNewsTitle());
+            tvSource.setText(item.getNewsSource().getName());
 
         }
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapterNews.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RVAdapterNews.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_news, parent, false);
 
         return new ViewHolder(view);
     }
 
-    public void setNews(List<News> itemModels) {
+    public void setNews(List<newsModel> itemModels) {
         if (mValues != null) {
             if (mValues.size() > 0) {
                 mValues.clear();

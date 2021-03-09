@@ -7,12 +7,12 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.CA326MyBubble.interfaces.RecyclerViewClickListener;
+import com.CA326MyBubble.interfaces.ClickListener;
 
-public class RecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
+public class TouchListener implements RecyclerView.OnItemTouchListener {
     private GestureDetector gestureDetector;
-    private RecyclerViewClickListener clickListener;
-    public RecyclerViewTouchListener(Context context, final RecyclerView recyclerView, final RecyclerViewClickListener clickListener) {
+    private ClickListener clickListener;
+    public TouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
         this.clickListener = clickListener;
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override

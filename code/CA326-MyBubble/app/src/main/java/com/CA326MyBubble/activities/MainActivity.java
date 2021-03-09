@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.CA326MyBubble.model.newsModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,18 +14,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.interfaces.OnFragmentListener;
-import com.CA326MyBubble.model.News;
+import com.CA326MyBubble.interfaces.FragListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import static com.CA326MyBubble.utils.AppUtils.LIST_INTENT;
-import static com.CA326MyBubble.utils.AppUtils.LIST_REQUEST;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE_SERVER;
-import static com.CA326MyBubble.utils.AppUtils.SLIDER_INTENT;
+import static com.CA326MyBubble.utils.Utilities.INTENT;
+import static com.CA326MyBubble.utils.Utilities.LOCATION;
+import static com.CA326MyBubble.utils.Utilities.TYPE;
+import static com.CA326MyBubble.utils.Utilities.SERVER;
+import static com.CA326MyBubble.utils.Utilities.SLIDER_INTENT;
 
-public class MainActivity extends AppCompatActivity implements OnFragmentListener {
+public class MainActivity extends AppCompatActivity implements FragListener {
     private FirebaseAuth mAuth;
 
     @Override
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
             appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.navigation_dashboard, R.id.navigation_info, R.id.navigation_news)
                     .build();
-            navView.getMenu().removeItem(R.id.navigation_helpline);
+
 
 
 
@@ -102,11 +102,11 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
 
     @Override
     public void getListIntent(String intent, String arguement) {
-        if (intent.equals(LIST_INTENT))
+        if (intent.equals(INTENT))
         {
-            Intent it = new Intent(MainActivity.this, ListActivity.class);
-            it.putExtra(LIST_REQUEST, arguement);
-            it.putExtra(LIST_TYPE, LIST_TYPE_SERVER);
+            Intent it = new Intent(MainActivity.this, CountriesActivity.class);
+            it.putExtra(LOCATION, arguement);
+            it.putExtra(TYPE, SERVER);
             startActivity(it);
             overridePendingTransition(0,0);
         }
@@ -122,9 +122,9 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
     }
 
     @Override
-    public void getNewIntent(News news) {
+    public void getNewIntent(newsModel newsModel) {
         Intent it = new Intent(MainActivity.this, com.CA326MyBubble.activities.NewsDetailsActivity.class);
-        it.putExtra(com.CA326MyBubble.activities.NewsDetailsActivity.PARCELABLE_PARSING_DATA, news);
+        it.putExtra(com.CA326MyBubble.activities.NewsDetailsActivity.PARCELABLE_PARSING_DATA, newsModel);
         startActivity(it);
         overridePendingTransition(0,0);
     }

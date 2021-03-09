@@ -18,7 +18,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tvHeading"
+                    android:id="@+id/layoutTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
@@ -30,22 +30,21 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
                     android:id="@+id/linear4"
-                    android:weightSum="2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/radioFilter">
+                    app:layout_constraintTop_toBottomOf="@+id/radioFilter">
+
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
                         android:id="@+id/cvTested"
-                        android:layout_weight="1"
+                        style="@style/CustomCardView"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="7dp"
-                        style="@style/CustomCardView"
-                        >
+                        android:layout_weight="1">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -55,59 +54,61 @@
                             android:padding="5dp">
 
                             <TextView
+                                style="@style/LabelFontStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                style="@style/LabelFontStyle"
-                                android:textColor="@color/colorTested"
-                                android:text="Tested" />
+                                android:text="Tested"
+                                android:textColor="@color/colorTested" />
 
                             <TextView
-                                android:id="@+id/tvTested"
+                                android:id="@+id/totalTested"
+                                style="@style/ValueFontStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="__"
                                 android:textColor="@color/colorTested"
-                                style="@style/ValueFontStyle"
 
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>  <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:id="@+id/cvRecovered"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    style="@style/CustomCardView"
-                    android:layout_margin="7dp">
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cvRecovered"
+                        style="@style/CustomCardView"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
+                        android:layout_margin="7dp"
+                        android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            style="@style/LabelFontStyle"
-                            android:textColor="@color/colorRecovered"
-                            android:text="Recovered" />
-
-                        <TextView
-                            android:id="@+id/tvRecovered"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="__"
-                            android:textColor="@color/colorRecovered"
-                            style="@style/ValueFontStyle"
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                style="@style/LabelFontStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Recovered"
+                                android:textColor="@color/colorRecovered" />
+
+                            <TextView
+                                android:id="@+id/totalRecovered"
+                                style="@style/ValueFontStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="__"
+                                android:textColor="@color/colorRecovered"
+
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
 
                 </LinearLayout>
@@ -149,7 +150,7 @@
                             <TextView
                                 android:textSize="15sp"
                                 android:textStyle="bold"
-                                android:id="@+id/tvOne"
+                                android:id="@+id/TotalCases"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -186,7 +187,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/colorCasesToday"
                                 style="@style/ValueFontStyle"
-                                android:id="@+id/tvCasesToday"
+                                android:id="@+id/casesToday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -231,7 +232,7 @@
                             <TextView
                                 android:textSize="15sp"
                                 android:textStyle="bold"
-                                android:id="@+id/tvDeaths"
+                                android:id="@+id/totalDeaths"
                                 android:textColor="@color/colorDeaths"
                                 style="@style/ValueFontStyle"
 
@@ -271,7 +272,7 @@
                                 android:textColor="@color/colorDeathsToday"
                                 style="@style/ValueFontStyle"
 
-                                android:id="@+id/tvDeathsToday"
+                                android:id="@+id/deathsToday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -320,7 +321,7 @@
                                 android:textColor="@color/colorCritical"
                                 style="@style/ValueFontStyle"
 
-                                android:id="@+id/tvCritical"
+                                android:id="@+id/totalCritical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -356,7 +357,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/colorActive"
                                 style="@style/ValueFontStyle"
-                                android:id="@+id/tvActive"
+                                android:id="@+id/totalActiveCases"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -378,7 +379,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvHeading"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutTitle"
                     tools:text="Last Updated\n Mon, 01 Mar 2021 1:20:30 PM" />
 
                 <TextView

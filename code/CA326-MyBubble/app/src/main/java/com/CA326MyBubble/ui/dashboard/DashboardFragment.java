@@ -22,16 +22,16 @@ import java.util.Calendar;
 
 import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.interfaces.OnFragmentListener;
+import com.CA326MyBubble.interfaces.FragListener;
 
-import static com.CA326MyBubble.utils.AppUtils.LIST_INTENT;
+import static com.CA326MyBubble.utils.Utilities.INTENT;
 
-public class DashboardFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
+public class DashboardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private com.CA326MyBubble.ui.dashboard.DashboardViewModel dashboardViewModel;
 
     private ProgressBar progressBar;
-    private OnFragmentListener mListener;
+    private FragListener mListener;
 
     private TextView tvCases;
     private TextView tvCasesToday;
@@ -65,16 +65,16 @@ public class DashboardFragment extends Fragment  implements SwipeRefreshLayout.O
 
 
         swipe = root.findViewById(R.id.swipeView);
-        tvCases = root.findViewById(R.id.tvOne);
-        tvCasesToday = root.findViewById(R.id.tvCasesToday);
-        tvRecovered = root.findViewById(R.id.tvRecovered);
-        tvDeaths = root.findViewById(R.id.tvDeaths);
-        tvDeathsToday = root.findViewById(R.id.tvDeathsToday);
-        tvCritical = root.findViewById(R.id.tvCritical);
-        tvActive = root.findViewById(R.id.tvActive);
+        tvCases = root.findViewById(R.id.TotalCases);
+        tvCasesToday = root.findViewById(R.id.casesToday);
+        tvRecovered = root.findViewById(R.id.totalRecovered);
+        tvDeaths = root.findViewById(R.id.totalDeaths);
+        tvDeathsToday = root.findViewById(R.id.deathsToday);
+        tvCritical = root.findViewById(R.id.totalCritical);
+        tvActive = root.findViewById(R.id.totalActiveCases);
         tvUpdated = root.findViewById(R.id.tvLastUpdated);
-        tvTested = root.findViewById(R.id.tvTested);
-        tvHeading = root.findViewById(R.id.tvHeading);
+        tvTested = root.findViewById(R.id.totalTested);
+        tvHeading = root.findViewById(R.id.layoutTitle);
         tvNetwork = root.findViewById(R.id.tvNetwork);
 
         fab = root.findViewById(R.id.floatingActionButton);
@@ -114,19 +114,20 @@ public class DashboardFragment extends Fragment  implements SwipeRefreshLayout.O
         dashboardViewModel.getDashboardViewModel(dataRequest, getActivity());
         dashboardViewModel.getStatistics().observe(getViewLifecycleOwner(), stats -> {
             if (stats != null){
-                if(locationDataRequest.equals(stats.getGeography()))
+                if(locationDataRequest.equals(stats.getCountry()))
                 {
                     tvNetwork.setVisibility(View.GONE);
                     progressBar.setVisibility(View.GONE);
                     refreshStats(false);
-                    tvCases.setText(stats.getConfirmed());
-                    tvCasesToday.setText(stats.getTodayConfirmed());
-                    tvRecovered.setText(stats.getRecovered());
-                    tvDeaths.setText(stats.getDeaths());
-                    tvDeathsToday.setText(stats.getTodayDeaths());
+                    tvCases.setText(stats.getTotalCases());
+                    tvCasesToday.setText(stats.getCasesToday());
+                    tvRecovered.setText(stats.getTotalRecovered());
+                    tvDeaths.setText(stats.getTotalDeaths());
+                    tvDeathsToday.setText(stats.getDeathsToday());
                     tvCritical.setText(stats.getCritical());
                     tvActive.setText(stats.getActive());
                     tvTested.setText(stats.getTested());
+
 
                     String date = "Last Updated"+"\n"+getDate(stats.getUpdated());
                     tvUpdated.setText(date);
@@ -199,11 +200,11 @@ public class DashboardFragment extends Fragment  implements SwipeRefreshLayout.O
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentListener) {
-            mListener = (OnFragmentListener) context;
+        if (context instanceof FragListener) {
+            mListener = (FragListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement InteractionListener");
         }
     }
 
@@ -226,7 +227,7 @@ public class DashboardFragment extends Fragment  implements SwipeRefreshLayout.O
     private void startIntent(String arguement) {
         if (mListener != null) {
 
-                mListener.getListIntent(LIST_INTENT, arguement);
+                mListener.getListIntent(INTENT, arguement);
 
         }
     }

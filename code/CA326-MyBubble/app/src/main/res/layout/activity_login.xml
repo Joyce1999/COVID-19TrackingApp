@@ -27,7 +27,7 @@
 
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,25 +79,12 @@
                 android:hint="Password"
                 android:inputType="textPassword" />
 
-            <Button
-                android:id="@+id/button_reset"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="140dp"
-                android:layout_marginLeft="180dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="4dp"
-                android:text="Forgot Password"
-                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/button_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="25dp"
                 android:text="@string/login"
                 android:textColor="@color/white" />
 
@@ -110,6 +97,5 @@
                 android:text="Go to Register"
                 android:textAllCaps="false" />
         </LinearLayout>
-    </ScrollView>
-
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

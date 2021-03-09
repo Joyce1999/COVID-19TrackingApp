@@ -15,17 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.model.CountryServer;
+import com.CA326MyBubble.model.CountrySelection;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
+public class RVAdapterSelectCountry extends RecyclerView.Adapter<RVAdapterSelectCountry.ViewHolder> implements Filterable {
 
-  private List<CountryServer> mValues;
-  private List<CountryServer> mValuesFilteredList;
+  private List<CountrySelection> mValues;
+  private List<CountrySelection> mValuesFilteredList;
     private Context mContext;
 
 
-    public RecyclerViewAdapter(Context context, List<CountryServer> values) {
+    public RVAdapterSelectCountry(Context context, List<CountrySelection> values) {
 
         mValues = values;
         mValuesFilteredList = values;
@@ -36,29 +36,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder  {
 
         public TextView textView;
-        public TextView textView2;
-        CountryServer item;
+        CountrySelection item;
 
         public ViewHolder(View v) {
 
             super(v);
-            textView = v.findViewById(R.id.tvOne);
-            textView2 =  v.findViewById(R.id.tvTwo);
+            textView = v.findViewById(R.id.TotalCases);
+
 
         }
 
-        public void setData(CountryServer item) {
+        public void setData(CountrySelection item) {
             this.item = item;
-            textView2.setVisibility(View.VISIBLE);
-            textView.setText(Integer.toString(item.getConfirmed()));
-            textView2.setText(item.getmCovidCountry());
+
+            textView.setText(item.getName());
 
         }
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RVAdapterSelectCountry.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.list_row, parent, false);
 
@@ -85,12 +83,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 if (charString.isEmpty()) {
                    mValuesFilteredList = mValues;
                 } else {
-                    List<CountryServer> filteredList = new ArrayList<>();
-                    for (CountryServer row : mValues) {
+                    List<CountrySelection> filteredList = new ArrayList<>();
+                    for (CountrySelection row : mValues) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getmCovidCountry().toLowerCase().contains(charString.toLowerCase().trim())) {
+                        if (row.getName().toLowerCase().contains(charString.toLowerCase().trim())) {
                             filteredList.add(row);
                         }
                     }
@@ -105,14 +103,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mValuesFilteredList = (List<CountryServer>) filterResults.values;
-                //mValuesFilteredList.addAll((List)filterResults.values);
+                mValuesFilteredList = (List<CountrySelection>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
-    public List<CountryServer> getmValuesFilteredList(
+    public List<CountrySelection> getmValuesFilteredList(
     )
     {
         return mValuesFilteredList;

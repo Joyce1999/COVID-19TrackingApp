@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class NewsResponseWrapper {
+public class NewsList {
 
     @SerializedName("status")
     private String status;
@@ -14,7 +14,7 @@ public class NewsResponseWrapper {
 
 
     @SerializedName("articles")
-    private List<News> articles;
+    private List<newsModel> articles;
 
 
     public String getStatus() {
@@ -33,11 +33,11 @@ public class NewsResponseWrapper {
         this.totalResult = totalResult;
     }
 
-    public NewsResponseWrapper(List<News> articles) {
+    public NewsList(List<newsModel> articles) {
         this.articles = articles;
     }
 
-    public List<News> getArticles() {
+    public List<newsModel> getArticles() {
         return articles;
     }
 

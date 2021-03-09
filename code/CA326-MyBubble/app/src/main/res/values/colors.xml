@@ -45,4 +45,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="CardColor">#99F1D8</color>
+    <color name="color_green">#0F9D58</color>
+    <color name="backgroundColor">#00DC9E</color>
+
 </resources>

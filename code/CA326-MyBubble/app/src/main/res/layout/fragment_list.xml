@@ -4,24 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ListActivityFragment"
+    tools:context=".fragments.CountriesFragment"
     tools:showIn="@layout/activity_list">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:id="@+id/rvList"
+        android:id="@+id/CountryList"
         android:layout_height="match_parent"/>
 
     <ProgressBar
-        android:id="@+id/progress_circular_country"
+        android:id="@+id/progressBarTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:indeterminate="true"
         android:indeterminateDrawable="@drawable/progress"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rvList"
-        app:layout_constraintStart_toStartOf="@+id/rvList"
+        app:layout_constraintEnd_toEndOf="@+id/CountryList"
+        app:layout_constraintStart_toStartOf="@+id/CountryList"
         app:layout_constraintTop_toTopOf="parent" />
-    <include layout="@layout/error"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

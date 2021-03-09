@@ -8,16 +8,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.CA326MyBubble.R;
 import com.CA326MyBubble.fragments.NewsDetailFragment;
-import com.CA326MyBubble.interfaces.OnFragmentListenerNewsDetail;
-import com.CA326MyBubble.model.News;
+import com.CA326MyBubble.interfaces.ListenerDetailsForNews;
+import com.CA326MyBubble.model.newsModel;
 
-public class NewsDetailsActivity extends AppCompatActivity implements OnFragmentListenerNewsDetail {
+public class NewsDetailsActivity extends AppCompatActivity implements ListenerDetailsForNews {
     public static final String PARCELABLE_PARSING_DATA = "parcelable_parsing_data" ;
 
-    private void beginSliderTransaction(News news)
+    private void beginSliderTransaction(newsModel newsModel)
     {
 
-        NewsDetailFragment fragment = NewsDetailFragment.newInstance(news);
+        NewsDetailFragment fragment = NewsDetailFragment.newInstance(newsModel);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment)
                 .commit();
         ActionBar actionBar = getSupportActionBar();
@@ -32,7 +32,7 @@ public class NewsDetailsActivity extends AppCompatActivity implements OnFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_details);
 
-        News model = getIntent().getParcelableExtra(PARCELABLE_PARSING_DATA);
+        newsModel model = getIntent().getParcelableExtra(PARCELABLE_PARSING_DATA);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginStart="3dp"
-        android:id="@+id/tvOne"
+        android:id="@+id/TotalCases"
         android:text="10900"
         >
     </TextView>
@@ -35,7 +35,7 @@
         android:id="@+id/tvTwo"
         android:layout_marginStart="3dp"
         android:visibility="gone"
-        android:text="dominican republic"
+        android:text="Ireland"
         android:layout_weight="1"
         />
 </LinearLayout>

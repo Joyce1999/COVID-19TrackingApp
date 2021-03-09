@@ -66,15 +66,15 @@ public class CountryDataRequest {
 
                     summary.setCases(cases);
                     summary.setTodayCases(todayCases);
-                    summary.setDeaths(deaths);
-                    summary.setTodayDeaths(todayDeaths);
-                    summary.setRecovered(recovered);
+                    summary.setTotalDeaths(deaths);
+                    summary.setDeathsToday(todayDeaths);
+                    summary.setTotalRecovered(recovered);
                     summary.setActive(active);
                     summary.setCritical(critical);
                     summary.setTested(tested);
                     summary.setUpdated(updated);
                     summary.setLocation(country);
-                    summary.setGeography("country");
+                    summary.setCountry("country");
                     mutableLiveData.setValue(summary);
 
 

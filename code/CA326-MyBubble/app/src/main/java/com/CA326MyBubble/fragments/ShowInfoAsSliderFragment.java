@@ -19,8 +19,8 @@ import java.util.List;
 
 import com.CA326MyBubble.adapters.SliderAdapter;
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.interfaces.OnFragmentListenerSlider;
-import com.CA326MyBubble.model.Slide;
+import com.CA326MyBubble.interfaces.ListenerForInfoSlides;
+import com.CA326MyBubble.model.SlideModel;
 
 
 public class ShowInfoAsSliderFragment extends Fragment {
@@ -41,7 +41,7 @@ public class ShowInfoAsSliderFragment extends Fragment {
 
     private int slideCount;
 
-    private OnFragmentListenerSlider mListener;
+    private ListenerForInfoSlides mListener;
 
     public ShowInfoAsSliderFragment() {
         // Required empty public constructor
@@ -80,31 +80,31 @@ public class ShowInfoAsSliderFragment extends Fragment {
         btnCancel= root.findViewById(R.id.btnCancel);
 
 
-        List<Slide> slideList = new ArrayList<>();
+        List<SlideModel> slideModelList = new ArrayList<>();
 
         if (sliderRequest != null) {
             switch (sliderRequest)
             {
                 case "spread":
-                    slideList = howSpread();
+                    slideModelList = howSpread();
                     break;
                 case "quarantine":
-                    slideList = quarantine();
+                    slideModelList = quarantine();
                     break;
                 case "prevention":
-                    slideList = prevention();
+                    slideModelList = prevention();
                     break;
                 case "signs":
-                    slideList = signs();
+                    slideModelList = signs();
                     break;
                 case "reduce":
-                    slideList = reduce();
+                    slideModelList = reduce();
                     break;
             }
         }
 
 
-        sliderAdapter = new SliderAdapter(getActivity(), slideList);
+        sliderAdapter = new SliderAdapter(getActivity(), slideModelList);
 
         slideCount = sliderAdapter.getCount();
 
@@ -170,22 +170,14 @@ public class ShowInfoAsSliderFragment extends Fragment {
                 btnCancel.setVisibility(View.VISIBLE);
                 btnCancel.setText("cancel");
             }
-
         }
-
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-
         }
-
         @Override
         public void onPageScrollStateChanged(int arg0) {
-
         }
-
     };
-
-
     // set of Dots points
     private void addBottomDots(int currentPage) {
         TextView[] dots = new TextView[slideCount];
@@ -197,115 +189,107 @@ public class ShowInfoAsSliderFragment extends Fragment {
             dots[i].setTextColor(getResources().getColor(R.color.textPrimary));  // dot_inactive
             dotsLayout.addView(dots[i]);
         }
-
         if (dots.length > 0)
             dots[currentPage].setTextColor(getResources().getColor(R.color.colorAccent)); // dot_active
     }
-
-
-
-
-
-
-
-
-    public List<Slide> howSpread()
+    // Map of slides on how COVID-19 spreads
+    public List<SlideModel> howSpread()
     {
-        List<Slide> slideList = new ArrayList<>();
-        slideList.add(new Slide(
+        List<SlideModel> slideModelList = new ArrayList<>();
+        slideModelList.add(new SlideModel(
                 getResources().getString(R.string.infection1_heading),
                 getResources().getString(R.string.infection1),
                 R.drawable.waterdrop));
-        slideList.add(new Slide(getResources().getString(R.string.infection2_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.infection2_heading),
                 getResources().getString(R.string.infection2),R.drawable.closecontact));
-        slideList.add(new Slide(getResources().getString(R.string.infection3_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.infection3_heading),
                 getResources().getString(R.string.infection3),R.drawable.surface));
-        return slideList;
+        return slideModelList;
     }
-
-    public List<Slide> quarantine()
+    // Map of slides on how to quarantine
+    public List<SlideModel> quarantine()
     {
-        List<Slide> slideList = new ArrayList<>();
-        slideList.add(new Slide(
+        List<SlideModel> slideModelList = new ArrayList<>();
+        slideModelList.add(new SlideModel(
                 getResources().getString(R.string.quarantine1_heading),
                 getResources().getString(R.string.quarantine1_body),
                 R.drawable.quarantinedays));
-        slideList.add(new Slide(getResources().getString(R.string.quarantine2_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.quarantine2_heading),
                 getResources().getString(R.string.quarantine2_body),
                 R.drawable.stayhome));
-        slideList.add(new Slide(getResources().getString(R.string.quarantine3_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.quarantine3_heading),
                 getResources().getString(R.string.quarantine3_body),
                 R.drawable.spread));
-        slideList.add(new Slide(getResources().getString(R.string.quarantine4_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.quarantine4_heading),
                 getResources().getString(R.string.quarantine4_body),
                 R.drawable.illness));
 
-        return slideList;
+        return slideModelList;
     }
-
-    public List<Slide> prevention()
+    // Map of slides of how to prevent getting COVID-19
+    public List<SlideModel> prevention()
     {
-        List<Slide> slideList = new ArrayList<>();
+        List<SlideModel> slideModelList = new ArrayList<>();
 
-        slideList.add(new Slide(
+        slideModelList.add(new SlideModel(
                 getResources().getString(R.string.prevention1_heading),
                 getResources().getString(R.string.prevention1),
                 R.drawable.hand));
-        slideList.add(new Slide(getResources().getString(R.string.prevention2_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.prevention2_heading),
                 getResources().getString(R.string.prevention2),
                 R.drawable.shake));
-        slideList.add(new Slide(getResources().getString(R.string.prevention3_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.prevention3_heading),
                 getResources().getString(R.string.prevention3),
                 R.drawable.sanitizer));
-        slideList.add(new Slide(getResources().getString(R.string.prevention4_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.prevention4_heading),
                 getResources().getString(R.string.prevention4),
                 R.drawable.surface));
 
-        return slideList;
+        return slideModelList;
     }
 // Map of Symptom signs that may mean a person has contracted COVID-19
-    public List<Slide> signs()
+    public List<SlideModel> signs()
     {
-        List<Slide> slideList = new ArrayList<>();
-        slideList.add(new Slide(
+        List<SlideModel> slideModelList = new ArrayList<>();
+        slideModelList.add(new SlideModel(
                 getResources().getString(R.string.symptom1_heading),
                 getResources().getString(R.string.symptom1),
                 R.drawable.temperature));
-        slideList.add(new Slide(getResources().getString(R.string.symptom2_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.symptom2_heading),
                 getResources().getString(R.string.symptom2),
                 R.drawable.sneeze));
-        slideList.add(new Slide(getResources().getString(R.string.symptom3_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.symptom3_heading),
                 getResources().getString(R.string.symptom3),
                 R.drawable.cough));
-        slideList.add(new Slide(getResources().getString(R.string.symptom4_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.symptom4_heading),
                 getResources().getString(R.string.symptom4),
                 R.drawable.headache));
-        slideList.add(new Slide(getResources().getString(R.string.symptom5_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.symptom5_heading),
                 getResources().getString(R.string.symptom5),
                 R.drawable.breathing));
-        return slideList;
+        return slideModelList;
     }
     // Mapping of ways to reduce the spread, and reduce a persons risk of contracting COVID-19
-    public List<Slide> reduce()
+    public List<SlideModel> reduce()
     {
-        List<Slide> slideList = new ArrayList<>();
-        slideList.add(new Slide(
+        List<SlideModel> slideModelList = new ArrayList<>();
+        slideModelList.add(new SlideModel(
                 getResources().getString(R.string.reduce1_heading),
                 getResources().getString(R.string.reduce1),
                 R.drawable.sneeze));
-        slideList.add(new Slide(getResources().getString(R.string.reduce2_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.reduce2_heading),
                 getResources().getString(R.string.reduce2),
                 R.drawable.stayhome2));
-        slideList.add(new Slide(getResources().getString(R.string.reduce3_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.reduce3_heading),
                 getResources().getString(R.string.reduce3),
                 R.drawable.sneeze));
-        slideList.add(new Slide(getResources().getString(R.string.reduced4_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.reduced4_heading),
                 getResources().getString(R.string.reduce4),
                 R.drawable.facemask));
-        slideList.add(new Slide(getResources().getString(R.string.reduce5_heading),
+        slideModelList.add(new SlideModel(getResources().getString(R.string.reduce5_heading),
                 getResources().getString(R.string.reduce5),
                 R.drawable.stayhome2));
-        return slideList;
+        return slideModelList;
     }
 
 
@@ -319,11 +303,8 @@ public class ShowInfoAsSliderFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentListenerSlider) {
-            mListener = (OnFragmentListenerSlider) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        if (context instanceof ListenerForInfoSlides) {
+            mListener = (ListenerForInfoSlides) context;
         }
     }
 

@@ -3,7 +3,7 @@ package com.CA326MyBubble.repositories;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.CA326MyBubble.model.CountryLocal;
+import com.CA326MyBubble.model.CountrySelection;
 
 public class CountriesData {
 // Taken from NewsAPI.org, a live example of how to create a global news feed for different countries.
@@ -76,73 +76,73 @@ public class CountriesData {
 
 
     // Creates a list of the countries
-    private List<CountryLocal> countryLocalList = new ArrayList<>();
+    private List<CountrySelection> countrySelectionList = new ArrayList<>();
 
-    public List<CountryLocal> getCountryLocalList() {
+    public List<CountrySelection> getCountrySelectionList() {
 
         for (int i= 0; i < countriesAfrica.length; i++)
         {
-            CountryLocal countryLocal = new CountryLocal();
-            countryLocal.setName(countriesAfrica[i]);
-            countryLocal.setContinent("Africa");
-            countryLocal.setCode(codeAfrica[i]);
-            countryLocalList.add(countryLocal);
+            CountrySelection countrySelection = new CountrySelection();
+            countrySelection.setName(countriesAfrica[i]);
+            countrySelection.setContinent("Africa");
+            countrySelection.setCode(codeAfrica[i]);
+            countrySelectionList.add(countrySelection);
         }
         for (int i= 0; i < countriesEurope.length; i++)
         {
-            CountryLocal countryLocal = new CountryLocal();
-            countryLocal.setName(countriesEurope[i]);
-            countryLocal.setContinent("Europe");
-            countryLocal.setCode(codeEurope[i]);
-            countryLocalList.add(countryLocal);
+            CountrySelection countrySelection = new CountrySelection();
+            countrySelection.setName(countriesEurope[i]);
+            countrySelection.setContinent("Europe");
+            countrySelection.setCode(codeEurope[i]);
+            countrySelectionList.add(countrySelection);
         }
         for (int i= 0; i < countriesNorthAmerica.length; i++)
         {
-            CountryLocal countryLocal = new CountryLocal();
-            countryLocal.setName(countriesNorthAmerica[i]);
-            countryLocal.setContinent("North America");
-            countryLocal.setCode(codesNorthAmerica[i]);
-            countryLocalList.add(countryLocal);
+            CountrySelection countrySelection = new CountrySelection();
+            countrySelection.setName(countriesNorthAmerica[i]);
+            countrySelection.setContinent("North America");
+            countrySelection.setCode(codesNorthAmerica[i]);
+            countrySelectionList.add(countrySelection);
         }
         for (int i= 0; i < countriesAsia.length; i++)
         {
-            CountryLocal countryLocal = new CountryLocal();
-            countryLocal.setName(countriesAsia[i]);
-            countryLocal.setContinent("Asia");
-            countryLocal.setCode(codeAsia[i]);
-            countryLocalList.add(countryLocal);
+            CountrySelection countrySelection = new CountrySelection();
+            countrySelection.setName(countriesAsia[i]);
+            countrySelection.setContinent("Asia");
+            countrySelection.setCode(codeAsia[i]);
+            countrySelectionList.add(countrySelection);
         }
         for (int i= 0; i < countriesSouthAmerica.length; i++)
         {
-            CountryLocal countryLocal = new CountryLocal();
-            countryLocal.setName(countriesSouthAmerica[i]);
-            countryLocal.setContinent("South America");
-            countryLocal.setCode(codesSouthAmerica[i]);
-            countryLocalList.add(countryLocal);
+            CountrySelection countrySelection = new CountrySelection();
+            countrySelection.setName(countriesSouthAmerica[i]);
+            countrySelection.setContinent("South America");
+            countrySelection.setCode(codesSouthAmerica[i]);
+            countrySelectionList.add(countrySelection);
         }
         for (int i= 0; i < countriesAutraliaOceanea.length; i++)
         {
-            CountryLocal countryLocal = new CountryLocal();
-            countryLocal.setName(countriesAutraliaOceanea[i]);
-            countryLocal.setContinent("Australia/Oceania");
-            countryLocal.setCode(codesAutraliaOceanea[i]);
-            countryLocalList.add(countryLocal);
+            CountrySelection countrySelection = new CountrySelection();
+            countrySelection.setName(countriesAutraliaOceanea[i]);
+            countrySelection.setContinent("Australia/Oceania");
+            countrySelection.setCode(codesAutraliaOceanea[i]);
+            countrySelectionList.add(countrySelection);
         }
 
-        return countryLocalList;
+        return countrySelectionList;
     }
 
-    public CountryLocal getCountryDetails(String name)
+    public CountrySelection getCountryDetails(String name)
     {
-        List<CountryLocal> countries = getCountryLocalList();
-        CountryLocal countryLocal = new CountryLocal();
+        List<CountrySelection> countries = getCountrySelectionList();
+        CountrySelection countrySelection = new CountrySelection();
         for (int i= 0; i<countries.size();i++)
         {
             if (name.equals(countries.get(i).getName()));
             {
-                countryLocal = countries.get(i);
+                countrySelection = countries.get(i);
             }
         }
-        return countryLocal;
+        return countrySelection;
     }
 }

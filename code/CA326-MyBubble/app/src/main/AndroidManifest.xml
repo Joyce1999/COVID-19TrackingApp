@@ -38,7 +38,7 @@
                 android:value="com.CA326MyBubble.activities.MainActivity" />
         </activity>
         <activity
-            android:name="com.CA326MyBubble.activities.ListActivity"
+            android:name="com.CA326MyBubble.activities.CountriesActivity"
             android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="android.app.searchable"

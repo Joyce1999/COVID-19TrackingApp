@@ -2,7 +2,7 @@ package com.CA326MyBubble.service.Retrofit;
 
 import java.util.concurrent.TimeUnit;
 
-import com.CA326MyBubble.utils.AppUtils;
+import com.CA326MyBubble.utils.Utilities;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,7 +23,7 @@ public class RetrofitInstanceNews {
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(AppUtils.BASE_URL_NEWS)
+                    .baseUrl(Utilities.URL_NEWS)
                     .addConverterFactory(gsonConverterFactory)
                     .client(okHttpClient)
                     .build();

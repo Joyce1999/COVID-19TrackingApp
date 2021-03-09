@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.CA326MyBubble.activities.ListActivity">
+    tools:context="com.CA326MyBubble.activities.CountriesActivity">
 
     <item
         android:id="@+id/action_search"
@@ -13,7 +13,7 @@
     <item
         android:id="@+id/action_sort_alpha"
         android:icon="@drawable/ic_sort_by_alpha"
-        android:title="Alphabet"
+        android:title="Alphabetically"
         app:showAsAction="never"/>
 
     <item

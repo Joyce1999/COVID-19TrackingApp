@@ -18,37 +18,34 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.utils.AppUtils;
-import com.CA326MyBubble.interfaces.OnFragmentListenerNewsDetail;
-import com.CA326MyBubble.model.News;
+import com.CA326MyBubble.utils.Utilities;
+import com.CA326MyBubble.interfaces.ListenerDetailsForNews;
 
 
 public class NewsDetailFragment extends Fragment {
 
-    private OnFragmentListenerNewsDetail mListener;
+    private ListenerDetailsForNews mListener;
 
-    private News news;
-    private News getNews;
+    private com.CA326MyBubble.model.newsModel newsModel;
+    private com.CA326MyBubble.model.newsModel getNewsModel;
 
     public NewsDetailFragment() {
     }
 
-
-    // TODO: Rename and change types and number of parameters
-    public static NewsDetailFragment newInstance(News news) {
+    public static NewsDetailFragment newInstance(com.CA326MyBubble.model.newsModel newsModel) {
         NewsDetailFragment fragment = new NewsDetailFragment();
-        fragment.setNewDetail(news);
+        fragment.setNewDetail(newsModel);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getNews = news;
+        getNewsModel = newsModel;
     }
 
-    private void setNewDetail(News news) {
-        this.news = news;
+    private void setNewDetail(com.CA326MyBubble.model.newsModel newsModel) {
+        this.newsModel = newsModel;
     }
 
     @Override
@@ -69,27 +66,27 @@ public class NewsDetailFragment extends Fragment {
 
 
 
-        tvTitle.setText(getNews.getTitle());
-        tvSource.setText(String.format("%s %s", getResources().getString(R.string.sourceNews), getNews.getSource().getName()));
-        if (getNews.getAuthor() == null) {
+        tvTitle.setText(getNewsModel.getNewsTitle());
+        tvSource.setText(String.format("%s %s", getResources().getString(R.string.sourceNews), getNewsModel.getNewsSource().getName()));
+        if (getNewsModel.getNewsAuthor() == null) {
             tvAuthor.setText(R.string.editor);
         } else {
-            tvAuthor.setText(String.format("%s %s", getResources().getString(R.string.authorNews), getNews.getAuthor()));
+            tvAuthor.setText(String.format("%s %s", getResources().getString(R.string.authorNews), getNewsModel.getNewsAuthor()));
         }
-        tvPublished.setText(String.format("%s %s", getResources().getString(R.string.dateNews),  AppUtils.DateFormat(getNews.getPublishedAt())));
-        tvDesc.setText(getNews.getDescription());
+        tvPublished.setText(String.format("%s %s", getResources().getString(R.string.dateNews),  Utilities.DateFormat(getNewsModel.getPublishDate())));
+        tvDesc.setText(getNewsModel.getDesc());
 
-        if (getNews.getContent() == null) {
+        if (getNewsModel.getNewsContent() == null) {
             tvContent.setText(getResources().getString(R.string.description_unavailable));
         } else {
-            tvContent.setText(getNews.getContent());
+            tvContent.setText(getNewsModel.getNewsContent());
         }
         Glide.with(this)
-                .load(getNews.getUrlToImage())
+                .load(getNewsModel.getImageURL())
                 .into(imageView);
 
         btnMore.setOnClickListener(view -> {
-            String URL = getNews.getUrl();
+            String URL = getNewsModel.getUrl();
             Uri urlUri = Uri.parse(URL);
             Intent toUrl = new Intent(Intent.ACTION_VIEW, urlUri);
             startActivity(toUrl);
@@ -108,11 +105,11 @@ public class NewsDetailFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentListenerNewsDetail) {
-            mListener = (OnFragmentListenerNewsDetail) context;
+        if (context instanceof ListenerDetailsForNews) {
+            mListener = (ListenerDetailsForNews) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement InteractionListener");
         }
     }
 

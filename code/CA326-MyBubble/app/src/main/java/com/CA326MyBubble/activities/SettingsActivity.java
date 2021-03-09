@@ -1,18 +1,14 @@
 package com.CA326MyBubble.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -20,20 +16,20 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.CA326MyBubble.controllers.AppController;
 
-import com.CA326MyBubble.interfaces.OnFragmentInteractionListener;
-import com.CA326MyBubble.model.CountryLocal;
-import com.CA326MyBubble.model.CountryServer;
+import com.CA326MyBubble.interfaces.InteractionListener;
+import com.CA326MyBubble.model.CountrySelection;
+import com.CA326MyBubble.model.GlobalCountries;
 import com.CA326MyBubble.R;
 import com.CA326MyBubble.utils.ThemeController;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.CA326MyBubble.utils.AppUtils.LIST_REQUEST;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE_LOCAL;
-import static com.CA326MyBubble.utils.AppUtils.LOCATION_COUNTRY;
+import static com.CA326MyBubble.utils.Utilities.LOCATION;
+import static com.CA326MyBubble.utils.Utilities.TYPE;
+import static com.CA326MyBubble.utils.Utilities.LOCAL;
+import static com.CA326MyBubble.utils.Utilities.COUNTRY;
 
 
-public class SettingsActivity extends AppCompatActivity implements OnFragmentInteractionListener {
+public class SettingsActivity extends AppCompatActivity implements InteractionListener {
     private static final String TITLE_TAG = "settingsActivityTitle";
     String state, country;
 
@@ -124,11 +120,11 @@ public class SettingsActivity extends AppCompatActivity implements OnFragmentInt
 
 
     @Override
-    public void listItemClickServer(CountryServer countryServer) {
+    public void listItemClickServer(GlobalCountries globalCountries) {
     }
 
     @Override
-    public void listItemClickSetting(CountryLocal countryLocal, String location, String listType) {
+    public void listItemClickSetting(CountrySelection countrySelection, String location, String listType) {
 
         SharedPreferences getSharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor e = getSharedPreferences.edit();
@@ -136,9 +132,9 @@ public class SettingsActivity extends AppCompatActivity implements OnFragmentInt
         String continent;
 
 
-        countryName = countryLocal.getName();
-        continent = countryLocal.getContinent();
-        e.putString("countryLocal", countryName);
+        countryName = countrySelection.getName();
+        continent = countrySelection.getContinent();
+        e.putString("countrySelection", countryName);
         e.putString("continent", continent);
         AppController.getInstance().setCountry(countryName);
         AppController.getInstance().setContinent(continent);
@@ -169,9 +165,9 @@ public class SettingsActivity extends AppCompatActivity implements OnFragmentInt
                 prefCountry.setSummary(AppController.getInstance().getCountry());
                 prefCountry.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     public boolean onPreferenceClick(Preference preference) {
-                        Intent it = new Intent(getActivity(), ListActivity.class);
-                        it.putExtra(LIST_REQUEST, LOCATION_COUNTRY);
-                        it.putExtra(LIST_TYPE, LIST_TYPE_LOCAL);
+                        Intent it = new Intent(getActivity(), CountriesActivity.class);
+                        it.putExtra(LOCATION, COUNTRY);
+                        it.putExtra(TYPE, LOCAL);
                         startActivity(it);
                         getActivity().finish();
                         return true;

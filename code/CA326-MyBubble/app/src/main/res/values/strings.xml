@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyBubble</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_helpline">Health</string>
+    <string name="title_social">Social</string>
     <string name="title_info">Info</string>
 
     <string name="title_news">News</string>
@@ -36,7 +36,7 @@
 and how best to keep safe-->
     <string name="common_symptoms">FEVER . HEADACHE . DRY COUGH . FATIGUE . MUSCLE PAIN . SHORTNESS OF BREATH</string>
 
-    <string name="signs_and_symptoms">signs and symptoms</string>
+    <string name="signs_and_symptoms">Signs and symptoms</string>
 
     <string name="symptom1_heading">High Body Temperature</string>
     <string name="symptom2_heading">Coughing and Sneezing</string>
@@ -58,11 +58,11 @@ and how best to keep safe-->
     <string name="infection2_heading">Close contact</string>
     <string name="infection3_heading">Contaminated surface</string>
     <string name="infection1">Through respiratory droplets, when an infected person coughs or sneezes These droplets can land in the mouth or noses of people who are nearby or possibly inhaled into lungs</string>
-    <string name="infection2">Through close contact with infected person approximately within 2 metres 0 6 feet or 2 to 3 steps.This can be through hugging, kissing, hand shaking or standing close.</string>
-    <string name="infection3">By touching objects and surfaces contaminated by corona virus and then touching the mouth , nose or eyes.</string>
+    <string name="infection2">Through close contact with infected person approximately within 2 metres, 6 feet or 2 to 3 steps. This can be through hugging, kissing, hand shaking or standing close.</string>
+    <string name="infection3">By touching objects and surfaces contaminated by corona virus and then touching the mouth, nose or eyes.</string>
 
 
-    <string name="prevention">precautions </string>
+    <string name="prevention">Precautions </string>
 
     <string name="prevention1_heading">Wash your hands</string>
     <string name="prevention1">Wash your hands regularly with soap and running water for up to 20 seconds if not available, use an alcohol based sanitizer</string>
@@ -93,25 +93,17 @@ and how best to keep safe-->
     <string name="quarantine1_heading">What is self isolation?</string>
     <string name="quarantine1_body">Self isolation of quarantine is an act of individuals who may have been exposed to COVID-19 separating themselves for 14 days to monitor if the develop symptoms.</string>
     <string name="quarantine2_heading">Who should self isolate?</string>
-    <string name="quarantine2_body">Anyone who has traveled within the past 14 days to a countryLocal or region with reported COVID-19 cases or has had close contact with a person showing COVID-19 symptoms.</string>
+    <string name="quarantine2_body">Anyone who has traveled within the past 14 days to a country, area or region with reported COVID-19 cases or has had close contact with a person showing COVID-19 symptoms.</string>
     <string name="quarantine3_heading">Why self isolate?</string>
     <string name="quarantine3_body">Self isolation help reduce the spread of COVID-19 and reduce the chances of infecting others. We should self isolate as a way of helping others. </string>
     <string name="quarantine4_heading">Reporting Illness</string>
-    <string name="quarantine4_body">If you feel unwell, have a cold or a cough or fever, please call the Helpline assigned to your region , state or countryLocal.</string>
+    <string name="quarantine4_body">If you feel unwell, have a cold or a cough or fever, please call your GP, the health service or call 911/112.</string>
 
 
     <string name="title_activity_list">ListActivity</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
 
-
-    <string name="daily_notif">Daily Notification</string>
-    <string name="key_daily_reminder">daily reminder key</string>
-    <string name="daily_reminder_summary">Daily Reminder Every 08:00</string>
-    <string name="daily_reminder_setup">Daily Reminder Is Setup</string>
-    <string name="daily_reminder_canceled">Daily Reminder Canceled</string>
-    <string name="notif_title">Check Your Apps, For New Updated Data</string>
-    <string name="not_update">History\'s data has not been updated</string>
 
     <string name="read_more">Read More</string>
 
@@ -120,7 +112,7 @@ and how best to keep safe-->
     <string name="authorNews">Author : </string>
     <string name="dateNews">Date : </string>
     <string name="redirect">Redirect To Web Page…</string>
-    <string name="description_unavailable">Description  is not available, please press the button below to view the news</string>
+    <string name="description_unavailable">Description  is not available, please press the button below to view the newsModel</string>
 
 
     <string name="other_states">other states</string>
@@ -128,20 +120,6 @@ and how best to keep safe-->
     <string name="other_continents">other continents</string>
     <string name="connect_to_internet">Connect to internet to update</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_slider">SliderActivity</string>
     <string name="title_activity_new_detail">NewDetailActivity</string>
 

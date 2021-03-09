@@ -23,7 +23,7 @@ import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.model.Summary;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.CA326MyBubble.utils.AppUtils.GLOBE_URL;
+import static com.CA326MyBubble.utils.Utilities.GLOBE_URL;
 
 public class GlobeDataRequest {
 
@@ -55,15 +55,15 @@ public class GlobeDataRequest {
 
                     summary.setCases(cases);
                     summary.setTodayCases(todayCases);
-                    summary.setDeaths(deaths);
-                    summary.setTodayDeaths(todayDeaths);
-                    summary.setRecovered(recovered);
+                    summary.setTotalDeaths(deaths);
+                    summary.setDeathsToday(todayDeaths);
+                    summary.setTotalRecovered(recovered);
                     summary.setActive(active);
                     summary.setCritical(critical);
                     summary.setTested(tested);
                     summary.setUpdated(updated);
                     summary.setLocation("Global");
-                    summary.setGeography("globe");
+                    summary.setCountry("globe");
                     mutableLiveData.setValue(summary);
 
 
@@ -129,6 +129,4 @@ public class GlobeDataRequest {
 
         return mutableLiveData;
     }
-
-
 }

@@ -15,7 +15,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import java.util.List;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.model.Slide;
+import com.CA326MyBubble.model.SlideModel;
 
 public class SliderAdapter extends PagerAdapter {
 
@@ -23,20 +23,20 @@ public class SliderAdapter extends PagerAdapter {
 
     private Context context;
 
-    private List<Slide> slideItems;
+    private List<SlideModel> slideModelItems;
 
 
 
-    public SliderAdapter(Context context, List<Slide> slideItems ) {
+    public SliderAdapter(Context context, List<SlideModel> slideModelItems) {
 
         this.context = context;
-        this.slideItems = slideItems;
+        this.slideModelItems = slideModelItems;
 
     }
     @Override
     public int getCount() {
 
-        return slideItems.size();
+        return slideModelItems.size();
     }
 
     @Override
@@ -55,16 +55,16 @@ public class SliderAdapter extends PagerAdapter {
         container.addView(view);
 
         ImageView imageView = view.findViewById(R.id.imageView);
-        TextView slideHeading = view.findViewById(R.id.tvHeading);
+        TextView slideHeading = view.findViewById(R.id.layoutTitle);
         TextView slideDescription = view.findViewById(R.id.tvSubHeading);
 
 
 
 
-        imageView.setImageResource(slideItems.get(position).getImage());
+        imageView.setImageResource(slideModelItems.get(position).getImage());
 
-        slideHeading.setText(slideItems.get(position).getHeading());
-        slideDescription.setText(slideItems.get(position).getSubHeading());
+        slideHeading.setText(slideModelItems.get(position).getHeading());
+        slideDescription.setText(slideModelItems.get(position).getSubHeading());
 
 
 

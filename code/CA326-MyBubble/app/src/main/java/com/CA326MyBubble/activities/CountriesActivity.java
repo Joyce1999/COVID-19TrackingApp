@@ -11,30 +11,29 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.fragments.ListActivityFragment;
-import com.CA326MyBubble.fragments.ListDetailFragment;
-import com.CA326MyBubble.interfaces.OnFragmentInteractionListener;
-import com.CA326MyBubble.model.CountryLocal;
-import com.CA326MyBubble.model.CountryServer;
+import com.CA326MyBubble.fragments.CountriesFragment;
+import com.CA326MyBubble.fragments.CountryDetailFrag;
+import com.CA326MyBubble.interfaces.InteractionListener;
+import com.CA326MyBubble.model.CountrySelection;
+import com.CA326MyBubble.model.GlobalCountries;
 
-import static com.CA326MyBubble.utils.AppUtils.LIST_REQUEST;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE_LOCAL;
-import static com.CA326MyBubble.utils.AppUtils.LIST_TYPE_SETUP;
+import static com.CA326MyBubble.utils.Utilities.LOCATION;
+import static com.CA326MyBubble.utils.Utilities.TYPE;
+import static com.CA326MyBubble.utils.Utilities.LOCAL;
+import static com.CA326MyBubble.utils.Utilities.SETUP;
 
 
-public class ListActivity extends AppCompatActivity implements OnFragmentInteractionListener {
-
+public class CountriesActivity extends AppCompatActivity implements InteractionListener {
 
     String location;
-    private void beginListTransaction(String data, String listType)
+    private void startTransaction(String data, String listType)
     {
-        ListActivityFragment fragment = ListActivityFragment.newInstance(data, listType);
+        CountriesFragment fragment = CountriesFragment.newInstance(data, listType);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack(fragment.getTag())
                 .commit();
     }
-    private void beginDetailsTransaction(CountryServer countryServer){
-        ListDetailFragment fragment = ListDetailFragment.newInstance(countryServer);
+    private void startDetails(GlobalCountries globalCountries){
+        CountryDetailFrag fragment = CountryDetailFrag.newInstance(globalCountries);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack(fragment.getTag()).commit();
     }
 
@@ -47,10 +46,10 @@ public class ListActivity extends AppCompatActivity implements OnFragmentInterac
         setSupportActionBar(toolbar);
 
 
-        String data = getIntent().getStringExtra(LIST_REQUEST);
-        String listType = getIntent().getStringExtra(LIST_TYPE);
+        String data = getIntent().getStringExtra(LOCATION);
+        String listType = getIntent().getStringExtra(TYPE);
         location = listType;
-        beginListTransaction(data, listType);
+        startTransaction(data, listType);
 
         getSupportFragmentManager().addOnBackStackChangedListener(
                 () -> {
@@ -71,13 +70,13 @@ public class ListActivity extends AppCompatActivity implements OnFragmentInterac
     }
 
     @Override
-    public void listItemClickServer(CountryServer countryServer) {
-        beginDetailsTransaction(countryServer);
+    public void listItemClickServer(GlobalCountries globalCountries) {
+        startDetails(globalCountries);
 
     }
 
     @Override
-    public void listItemClickSetting(CountryLocal countryLocal, String location, String listType) {
+    public void listItemClickSetting(CountrySelection countrySelection, String location, String listType) {
 
         SharedPreferences getSharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor e = getSharedPreferences.edit();
@@ -86,9 +85,9 @@ public class ListActivity extends AppCompatActivity implements OnFragmentInterac
         String continent;
         String code;
 
-        countryName =  countryLocal.getName();
-        continent = countryLocal.getContinent();
-        code = countryLocal.getCode();
+        countryName =  countrySelection.getName();
+        continent = countrySelection.getContinent();
+        code = countrySelection.getCode();
 
         e.putString("country", countryName);
         e.putString("continent",continent);
@@ -99,18 +98,16 @@ public class ListActivity extends AppCompatActivity implements OnFragmentInterac
         AppController.getInstance().setCode(code);
 
 
-        if(listType.equals(LIST_TYPE_SETUP))
+        if(listType.equals(SETUP))
         {
             e.putBoolean("firstStart",false);
             e.apply();
             startActivity(new Intent(getApplicationContext(), com.CA326MyBubble.activities.MainActivity.class));
-            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
             finish();
         }
-        else if(listType.equals(LIST_TYPE_LOCAL)) {
+        else if(listType.equals(LOCAL)) {
             e.apply();
             startActivity(new Intent(getApplicationContext(), com.CA326MyBubble.activities.SettingsActivity.class));
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish();
         }
     }

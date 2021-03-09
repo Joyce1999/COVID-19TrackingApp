@@ -65,15 +65,15 @@ public class ContinentDataRequest {
 
                     summary.setCases(cases);
                     summary.setTodayCases(todayCases);
-                    summary.setDeaths(deaths);
-                    summary.setTodayDeaths(todayDeaths);
-                    summary.setRecovered(recovered);
+                    summary.setTotalDeaths(deaths);
+                    summary.setDeathsToday(todayDeaths);
+                    summary.setTotalRecovered(recovered);
                     summary.setActive(active);
                     summary.setCritical(critical);
                     summary.setTested("N/A");
                     summary.setUpdated(updated);
                     summary.setLocation(continent);
-                    summary.setGeography("continent");
+                    summary.setCountry("continent");
                     mutableLiveData.setValue(summary);
 
 

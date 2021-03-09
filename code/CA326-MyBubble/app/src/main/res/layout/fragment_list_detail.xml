@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ListDetailFragment">
+    tools:context=".fragments.CountryDetailFrag">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:padding="16dp"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tvHeading"
+            android:id="@+id/layoutTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
@@ -30,7 +30,7 @@
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvHeading">
+            app:layout_constraintTop_toBottomOf="@id/layoutTitle">
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:id="@+id/cvTested"
@@ -55,7 +55,7 @@
                         android:text="Tested" />
 
                     <TextView
-                        android:id="@+id/tvTested"
+                        android:id="@+id/totalTested"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -89,7 +89,7 @@
                     android:text="Recovered" />
 
                 <TextView
-                    android:id="@+id/tvRecovered"
+                    android:id="@+id/totalRecovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -142,7 +142,7 @@
                     <TextView
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:id="@+id/tvOne"
+                        android:id="@+id/TotalCases"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -179,7 +179,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorCasesToday"
                         style="@style/ValueFontStyle"
-                        android:id="@+id/tvCasesToday"
+                        android:id="@+id/casesToday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -224,7 +224,7 @@
                     <TextView
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:id="@+id/tvDeaths"
+                        android:id="@+id/totalDeaths"
                         android:textColor="@color/colorDeaths"
                         style="@style/ValueFontStyle"
 
@@ -264,7 +264,7 @@
                         android:textColor="@color/colorDeathsToday"
                         style="@style/ValueFontStyle"
 
-                        android:id="@+id/tvDeathsToday"
+                        android:id="@+id/deathsToday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -313,7 +313,7 @@
                         android:textColor="@color/colorCritical"
                         style="@style/ValueFontStyle"
 
-                        android:id="@+id/tvCritical"
+                        android:id="@+id/totalCritical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -349,7 +349,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorActive"
                         style="@style/ValueFontStyle"
-                        android:id="@+id/tvActive"
+                        android:id="@+id/totalActiveCases"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

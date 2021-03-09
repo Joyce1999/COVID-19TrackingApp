@@ -68,4 +68,10 @@ dependencies {
 
     //Simple Arc Loader - A cool loading arc
     implementation 'com.leo.simplearcloader:simplearcloader:1.0.+'
+
+    // Fancy WalkThrough used after splash activity can be disabled by users if needs be
+    implementation 'com.github.Shashank02051997:FancyWalkthrough-Android:2.1'
+
+    // Piechart for COVID-19 Cases data
+    implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
 }

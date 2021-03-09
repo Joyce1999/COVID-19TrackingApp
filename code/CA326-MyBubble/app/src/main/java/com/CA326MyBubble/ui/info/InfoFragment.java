@@ -14,14 +14,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.interfaces.OnFragmentListener;
+import com.CA326MyBubble.interfaces.FragListener;
 
-import static com.CA326MyBubble.utils.AppUtils.SLIDER_INTENT;
+import static com.CA326MyBubble.utils.Utilities.SLIDER_INTENT;
 
 public class InfoFragment extends Fragment {
 
     private com.CA326MyBubble.ui.info.InfoViewModel infoViewModel;
-    private OnFragmentListener mListener;
+    private FragListener mListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -83,11 +83,11 @@ public class InfoFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentListener) {
-            mListener = (OnFragmentListener) context;
+        if (context instanceof FragListener) {
+            mListener = (FragListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement InteractionListener");
         }
     }
 

@@ -13,17 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.model.Slide;
+import com.CA326MyBubble.model.SlideModel;
 
 
-public class RecyclerViewAdapterSlide extends RecyclerView.Adapter<RecyclerViewAdapterSlide.ViewHolder>{
+public class RVAdapterSlide extends RecyclerView.Adapter<RVAdapterSlide.ViewHolder>{
 
-  private List<Slide> mValues;
+  private List<SlideModel> mValues;
 
     private Context mContext;
 
 
-    public RecyclerViewAdapterSlide(Context context, List<Slide> values) {
+    public RVAdapterSlide(Context context, List<SlideModel> values) {
 
         mValues = values;
 
@@ -35,7 +35,7 @@ public class RecyclerViewAdapterSlide extends RecyclerView.Adapter<RecyclerViewA
 
         public TextView textView;
         public ImageView imageView;
-        Slide item;
+        SlideModel item;
 
         public ViewHolder(View v) {
 
@@ -45,7 +45,7 @@ public class RecyclerViewAdapterSlide extends RecyclerView.Adapter<RecyclerViewA
 
         }
 
-        public void setData(Slide item) {
+        public void setData(SlideModel item) {
             this.item = item;
 
             textView.setText(item.getSubHeading());
@@ -56,7 +56,7 @@ public class RecyclerViewAdapterSlide extends RecyclerView.Adapter<RecyclerViewA
 
     @NonNull
     @Override
-    public RecyclerViewAdapterSlide.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RVAdapterSlide.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_recycler, parent, false);
 

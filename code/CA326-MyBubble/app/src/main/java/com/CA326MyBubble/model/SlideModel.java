@@ -1,12 +1,12 @@
 package com.CA326MyBubble.model;
 
-public class Slide {
+public class SlideModel {
     private String heading;
             private String subHeading;
             private int image;
 
 
-    public Slide(String heading, String subHeading, int image) {
+    public SlideModel(String heading, String subHeading, int image) {
         this.heading = heading;
         this.subHeading = subHeading;
         this.image = image;

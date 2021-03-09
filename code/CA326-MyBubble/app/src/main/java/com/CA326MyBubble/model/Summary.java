@@ -2,114 +2,127 @@ package com.CA326MyBubble.model;
 
 public class Summary {
 
-    private String confirmed;
-    private String todayConfirmed;
-    private String recovered;
-    private String todayRecovered;
-    private String deaths;
-    private String todayDeaths;
-    private String critical;
-    private String active;
-    private String tested;
+    private String totalCases, casesToday, totalRecovered, recoveredToday, totalDeaths, deathsToday, critical, active, tested, location, country;
     private long  updated;
-    private String location;
-    private String geography;
 
 
-    public String getConfirmed() {
-        return confirmed;
+
+    public String getTotalCases() {
+
+        return totalCases;
     }
 
     public void setCases(String confirmed) {
-        this.confirmed = confirmed;
+
+        this.totalCases = confirmed;
     }
 
     public long getUpdated() {
+
         return updated;
     }
 
     public void setUpdated(long updated) {
+
         this.updated = updated;
     }
 
     public String getLocation() {
+
         return location;
     }
 
     public void setLocation(String location) {
+
         this.location = location;
     }
 
     public String getTested() {
+
         return tested;
     }
 
     public void setTested(String tested) {
+
         this.tested = tested;
     }
 
-    public String getTodayConfirmed() {
-        return todayConfirmed;
+    public String getCasesToday() {
+
+        return casesToday;
     }
 
     public void setTodayCases(String todayConfirmed) {
-        this.todayConfirmed = todayConfirmed;
+        this.casesToday = todayConfirmed;
     }
 
-    public String getRecovered() {
-        return recovered;
+    public String getTotalRecovered() {
+
+        return totalRecovered;
     }
 
-    public void setRecovered(String recovered) {
-        this.recovered = recovered;
+    public void setTotalRecovered(String totalRecovered) {
+
+        this.totalRecovered = totalRecovered;
     }
 
-    public String getDeaths() {
-        return deaths;
+    public String getTotalDeaths() {
+
+        return totalDeaths;
     }
 
-    public void setDeaths(String deaths) {
-        this.deaths = deaths;
+    public void setTotalDeaths(String totalDeaths) {
+
+        this.totalDeaths = totalDeaths;
     }
 
-    public String getTodayDeaths() {
-        return todayDeaths;
+    public String getDeathsToday() {
+
+        return deathsToday;
     }
 
-    public void setTodayDeaths(String todayDeaths) {
-        this.todayDeaths = todayDeaths;
+    public void setDeathsToday(String deathsToday) {
+
+        this.deathsToday = deathsToday;
     }
 
     public String getCritical() {
+
         return critical;
     }
 
     public void setCritical(String critical) {
+
         this.critical = critical;
     }
 
     public String getActive() {
+
         return active;
     }
 
     public void setActive(String active) {
+
         this.active = active;
     }
 
-    public String getTodayRecovered() {
-        return todayRecovered;
+    public String getRecoveredToday() {
+        return recoveredToday;
     }
 
-    public void setTodayRecovered(String todayRecovered) {
-        this.todayRecovered = todayRecovered;
+    public void setRecoveredToday(String recoveredToday) {
+
+        this.recoveredToday = recoveredToday;
     }
 
 
-    public String getGeography() {
-        return geography;
+    public String getCountry() {
+
+        return country;
     }
 
-    public void setGeography(String geography) {
-        this.geography = geography;
+    public void setCountry(String country) {
+
+        this.country = country;
     }
 }

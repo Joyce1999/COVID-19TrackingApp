@@ -2,14 +2,14 @@ package com.CA326MyBubble.service.Retrofit;
 
 import java.util.List;
 
-import com.CA326MyBubble.model.News;
+import com.CA326MyBubble.model.newsModel;
 
 public class RestApiResponse {
 
-    private List<News> posts;
+    private List<newsModel> posts;
     private Throwable error;
 
-    public RestApiResponse(List<News> posts) {
+    public RestApiResponse(List<newsModel> posts) {
         this.posts = posts;
         this.error = null;
     }
@@ -19,11 +19,11 @@ public class RestApiResponse {
         this.posts = null;
     }
 
-    public List<News> getPosts() {
+    public List<newsModel> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<News> posts) {
+    public void setPosts(List<newsModel> posts) {
         this.posts = posts;
     }
 
