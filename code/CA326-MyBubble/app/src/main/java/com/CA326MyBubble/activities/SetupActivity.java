@@ -1,5 +1,6 @@
 package com.CA326MyBubble.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +32,7 @@ public class SetupActivity extends AppCompatActivity {
     private EditText setupAddress;
     private EditText setupGender;
     private String user_id;
+    Context context = this;
     SimpleArcLoader simpleArcLoader;
 
     private Button button_setup;
@@ -86,6 +88,7 @@ public class SetupActivity extends AppCompatActivity {
                 String mobile = MobileNumber.getText().toString();
                 String address = setupAddress.getText().toString();
                 String gender = setupGender.getText().toString();
+                String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
 
                 if (!TextUtils.isEmpty(user_name)) {
                     String user_id = firebaseAuth.getCurrentUser().getUid();
@@ -94,6 +97,7 @@ public class SetupActivity extends AppCompatActivity {
                     userMap.put("Mobile_Number", mobile);
                     userMap.put("Address", address);
                     userMap.put("Gender", gender);
+                    userMap.put("BT_Add",btAddr);
                     simpleArcLoader.start();
                     simpleArcLoader.setVisibility(View.VISIBLE);
 
