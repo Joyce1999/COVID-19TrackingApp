@@ -75,11 +75,11 @@ public class ScannerService extends Service {
             //if(addresses.contains(result.getDevice().getAddress()))
             // Test BLE MAC Address to be removed
             if(result.getDevice().getAddress().equals("BC:7E:8B:BE:7A:85"))
-                // If distance less than 2m send notification, Distance under 0.1 often returned in error.
-                if (distance < 2.0 && distance > 0.1) {
+                // If distance less than 2m send notification, Distance under 0.5 often returned in error.
+                if (distance < 2.0 && distance > 0.5) {
                     Notification n  = new Notification.Builder(ScannerService.this.getApplicationContext())
                             .setContentTitle("Social Distance Breach")
-                            .setContentText("Social distance bubble breached.")
+                            .setContentText("Contact within" + (Math.round(distance * 100.0) / 100.0) + "metres.")
                             .setSmallIcon(R.drawable.ic_bubble_breach)
                             .setAutoCancel(true).build();
                     NotificationManager notificationManager =

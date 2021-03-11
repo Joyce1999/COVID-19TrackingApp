@@ -1,10 +1,12 @@
 package com.CA326MyBubble.ui.dashboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.CA326MyBubble.service.ScannerService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +26,7 @@ import java.util.Calendar;
 import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.R;
 import com.CA326MyBubble.interfaces.FragListener;
+import com.CA326MyBubble.service.ScannerService;
 
 import static com.CA326MyBubble.ut.Utilities.INTENT;
 
@@ -48,6 +52,9 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     private FloatingActionButton fab;
     private boolean isNetworkOk;
     private SwipeRefreshLayout swipe;
+
+    private Button startScanButton;
+    private Button stopScanButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, final Bundle savedInstanceState) {
@@ -76,6 +83,30 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         tvTested = root.findViewById(R.id.totalTested);
         tvHeading = root.findViewById(R.id.layoutTitle);
         tvNetwork = root.findViewById(R.id.tvNetwork);
+        Intent i = new Intent(getActivity(),ScannerService.class);
+
+        startScanButton = (Button) root.findViewById(R.id.StartScanButton);
+        startScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startScanButton.setVisibility(View.INVISIBLE);
+                stopScanButton.setVisibility(View.VISIBLE);
+                getActivity().startService(i);
+            }
+        });
+
+        stopScanButton = (Button) root.findViewById(R.id.StopScanButton);
+        stopScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopScanButton.setVisibility(View.INVISIBLE);
+                startScanButton.setVisibility(View.VISIBLE);
+                getActivity().stopService(i);
+
+            }
+        });
+        stopScanButton.setVisibility(View.INVISIBLE);
+
 
         fab = root.findViewById(R.id.floatingActionButton);
 
@@ -105,6 +136,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         fab.setOnClickListener(v -> startIntent(locationDataRequest));
 
         return root;
+
     }
 
 

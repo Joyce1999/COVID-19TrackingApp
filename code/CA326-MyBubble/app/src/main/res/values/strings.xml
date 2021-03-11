@@ -128,4 +128,7 @@ and how best to keep safe-->
     <string name="register">Create new Account</string>
     <string name="finishprofile">Confirm Details</string>
 
+    <string name="button1">Scan for Close Contacts</string>
+    <string name="button2">Stop Scanning</string>
+
 </resources>

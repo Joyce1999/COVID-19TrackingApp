@@ -11,8 +11,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.CA326MyBubble.model.newsModel;
+import com.CA326MyBubble.service.ScannerService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.RequiresApi;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements FragListener {
     // BT used for gaining permissions before starting ScannerService
     BluetoothManager mBluetoothManager;
     BluetoothAdapter mBluetoothAdapter;
+
 
     private final static int REQUEST_ENABLE_BT = 1;
     private final static int PERMISSION_REQUEST_FINE_LOCATION = 1;
@@ -74,22 +78,6 @@ public class MainActivity extends AppCompatActivity implements FragListener {
 
 
         });
-//startScanningButton = (Button) findViewById(R.id.StartScanButton);
-        //startScanningButton.setOnClickListener(new View.OnClickListener() {
-        //  @Override
-        // public void onClick(View view) {
-        //startScanning();
-        // }
-        // });
-
-        //stopScanningButton = (Button) findViewById(R.id.StopScanButton);
-        //stopScanningButton.setOnClickListener(new View.OnClickListener() {
-        //@Override
-        //public void onClick(View v) {
-        //stopScanning();
-        // }
-        //});
-        //stopScanningButton.setVisibility(View.INVISIBLE);
         // Asking for BT permission
         mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
@@ -113,27 +101,7 @@ public class MainActivity extends AppCompatActivity implements FragListener {
             builder.show();
         }
     }
-// public void startScanning() {
-    // System.out.println("start scanning");
-    // startScanningButton.setVisibility(View.INVISIBLE);
-    //stopScanningButton.setVisibility(View.VISIBLE);
-    //AsyncTask.execute(new Runnable() {
-    //@Override
-    //public void run() {
-    //scan.onStartCommand();
-    //}
-    ///});
-    //}
-    // public void stopScanning() {
-    // System.out.println("stopping scanning");
-    // startScanningButton.setVisibility(View.VISIBLE);
-    // stopScanningButton.setVisibility(View.INVISIBLE);
-    //AsyncTask.execute(new Runnable() {
-    //@Override
-    /// public void run() {
-    //mBluetoothScanner.stopScan(leScanCallback);
-    // }
-    // });
+
 
 
 
