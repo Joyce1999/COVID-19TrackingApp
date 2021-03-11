@@ -11,14 +11,14 @@ import com.CA326MyBubble.fragments.NewsDetailFragment;
 import com.CA326MyBubble.interfaces.ListenerDetailsForNews;
 import com.CA326MyBubble.model.newsModel;
 
-public class NewsDetailsActivity extends AppCompatActivity implements ListenerDetailsForNews {
+public class NewsInfoActivity extends AppCompatActivity implements ListenerDetailsForNews {
     public static final String PARCELABLE_PARSING_DATA = "parcelable_parsing_data" ;
 
     private void beginSliderTransaction(newsModel newsModel)
     {
-
-        NewsDetailFragment fragment = NewsDetailFragment.newInstance(newsModel);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment)
+        // Starts the fragment, and allows it to display to user
+        NewsDetailFragment frag = NewsDetailFragment.newInstance(newsModel);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, frag)
                 .commit();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -31,7 +31,7 @@ public class NewsDetailsActivity extends AppCompatActivity implements ListenerDe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_details);
-
+        // Serializes the data from a diff page, much faster than reg java serialize
         newsModel model = getIntent().getParcelableExtra(PARCELABLE_PARSING_DATA);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -42,17 +42,14 @@ public class NewsDetailsActivity extends AppCompatActivity implements ListenerDe
             actionBar.setTitle("");
         }
         beginSliderTransaction(model);
-
-    }
-
-    @Override
-    public void webIntent(String url) {
-
     }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
-
+    // Opens up the web view of a news article
+    @Override
+    public void webIntent(String url) {
+    }
 }

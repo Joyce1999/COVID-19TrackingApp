@@ -8,14 +8,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import com.CA326MyBubble.utils.ThemeController;
+import com.CA326MyBubble.ut.ThemeController;
 
+// Essentially a helper class to assist with methods and movement throughout the app
 public class AppController extends Application {
 
-    public static final String TAG = AppController.class.getSimpleName();
-    private RequestQueue mRequestQueue;
+    private RequestQueue ReqQueue;
     private static AppController mInstance;
-
+    public static final String TAG = AppController.class.getSimpleName();
 
     String code;
     String continent;
@@ -31,17 +31,17 @@ public class AppController extends Application {
         mInstance = this;
 
         SharedPreferences getSharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
-
+        // Set based on whether or not its the applications first start EG. App just been installed on a new device
         setFirstStart(getSharedPreferences.getBoolean("firstStart", true));
-
+        // Controls what happens based on the appType
         setAppType(getSharedPreferences.getString("appType", "covidGlobal"));
-
+        // Defaults to what I have set as the System display, can be changed to dark/light
         new ThemeController(getSharedPreferences.getString("theme", "FollowSystem"));
-
+        // Setting continent on dashboard and also grabs continent based on country selection
         setContinent(getSharedPreferences.getString("continent", null));
-
+        // Sets Country based on selection
         setCountry(getSharedPreferences.getString("country", null));
-
+        // Grabs country code, EG. Ireland = ie, this allows the newapi to display country related news
         setCode(getSharedPreferences.getString("code", null));
 
     }
@@ -51,11 +51,11 @@ public class AppController extends Application {
     }
 
     public RequestQueue getRequestQueue() {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (ReqQueue == null) {
+            ReqQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
-        return mRequestQueue;
+        return ReqQueue;
     }
 
     public <T> void addToRequestQueue(Request<T> req, String tag) {
@@ -69,8 +69,8 @@ public class AppController extends Application {
     }
 
     public void cancelPendingRequests(Object tag) {
-        if (mRequestQueue != null) {
-            mRequestQueue.cancelAll(tag);
+        if (ReqQueue != null) {
+            ReqQueue.cancelAll(tag);
         }
     }
 

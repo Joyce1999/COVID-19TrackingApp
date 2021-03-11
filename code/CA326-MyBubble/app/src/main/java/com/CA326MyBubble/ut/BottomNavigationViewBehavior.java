@@ -1,4 +1,4 @@
-package com.CA326MyBubble.utils;
+package com.CA326MyBubble.ut;
 
 import android.view.View;
 

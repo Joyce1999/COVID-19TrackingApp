@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.CA326MyBubble.R;
 import com.CA326MyBubble.interfaces.FragListener;
 
-import static com.CA326MyBubble.utils.Utilities.SLIDER_INTENT;
+import static com.CA326MyBubble.ut.Utilities.SLIDER_INTENT;
 
 public class InfoFragment extends Fragment {
 

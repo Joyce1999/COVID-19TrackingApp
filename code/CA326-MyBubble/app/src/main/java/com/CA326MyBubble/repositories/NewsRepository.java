@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.CA326MyBubble.BuildConfig;
 import com.CA326MyBubble.controllers.AppController;
-import com.CA326MyBubble.utils.Utilities;
+import com.CA326MyBubble.ut.Utilities;
 import com.CA326MyBubble.model.NewsList;
 import com.CA326MyBubble.service.Retrofit.RestApiResponse;
 import com.CA326MyBubble.service.Retrofit.RestApiServiceNews;

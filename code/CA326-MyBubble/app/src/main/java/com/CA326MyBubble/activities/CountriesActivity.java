@@ -17,24 +17,25 @@ import com.CA326MyBubble.interfaces.InteractionListener;
 import com.CA326MyBubble.model.CountrySelection;
 import com.CA326MyBubble.model.GlobalCountries;
 
-import static com.CA326MyBubble.utils.Utilities.LOCATION;
-import static com.CA326MyBubble.utils.Utilities.TYPE;
-import static com.CA326MyBubble.utils.Utilities.LOCAL;
-import static com.CA326MyBubble.utils.Utilities.SETUP;
+import static com.CA326MyBubble.ut.Utilities.LOCATION;
+import static com.CA326MyBubble.ut.Utilities.TYPE;
+import static com.CA326MyBubble.ut.Utilities.LOCAL;
+import static com.CA326MyBubble.ut.Utilities.SETUP;
 
 
 public class CountriesActivity extends AppCompatActivity implements InteractionListener {
 
     String location;
-    private void startTransaction(String data, String listType)
+    // Sets up and initialises the fragment
+    private void initialiseFragment(String data, String listType)
     {
-        CountriesFragment fragment = CountriesFragment.newInstance(data, listType);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack(fragment.getTag())
+        CountriesFragment frag = CountriesFragment.newInstance(data, listType);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, frag).addToBackStack(frag.getTag())
                 .commit();
     }
     private void startDetails(GlobalCountries globalCountries){
-        CountryDetailFrag fragment = CountryDetailFrag.newInstance(globalCountries);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack(fragment.getTag()).commit();
+        CountryDetailFrag frag = CountryDetailFrag.newInstance(globalCountries);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, frag).addToBackStack(frag.getTag()).commit();
     }
 
 
@@ -42,15 +43,16 @@ public class CountriesActivity extends AppCompatActivity implements InteractionL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Setup Action bar
+        Toolbar bar = findViewById(R.id.toolbar);
+        setSupportActionBar(bar);
 
-
-        String data = getIntent().getStringExtra(LOCATION);
         String listType = getIntent().getStringExtra(TYPE);
-        location = listType;
-        startTransaction(data, listType);
+        String data = getIntent().getStringExtra(LOCATION);
 
+        location = listType;
+        initialiseFragment(data, listType);
+        // Allows a user to return to previous page via actionbar
         getSupportFragmentManager().addOnBackStackChangedListener(
                 () -> {
                     if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
@@ -64,17 +66,14 @@ public class CountriesActivity extends AppCompatActivity implements InteractionL
             actionBar.setDisplayHomeAsUpEnabled(true);
 
         }
-
-
-
     }
-
+    // When first opening the app displays all available details
     @Override
     public void listItemClickServer(GlobalCountries globalCountries) {
         startDetails(globalCountries);
 
     }
-
+    // Grabs the country select option from settings, and essentially gathers the selected data and sets it.
     @Override
     public void listItemClickSetting(CountrySelection countrySelection, String location, String listType) {
 
@@ -93,18 +92,20 @@ public class CountriesActivity extends AppCompatActivity implements InteractionL
         e.putString("continent",continent);
         e.putString("code",code);
 
+        // Sets the data via app controller
         AppController.getInstance().setCountry(countryName);
         AppController.getInstance().setContinent(continent);
         AppController.getInstance().setCode(code);
 
-
+        // If first time opening the app, user will be prompted to select a country
         if(listType.equals(SETUP))
         {
             e.putBoolean("firstStart",false);
             e.apply();
-            startActivity(new Intent(getApplicationContext(), com.CA326MyBubble.activities.MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
+        // Otherwise its not first start and can be selected via the settings activity
         else if(listType.equals(LOCAL)) {
             e.apply();
             startActivity(new Intent(getApplicationContext(), com.CA326MyBubble.activities.SettingsActivity.class));
@@ -113,15 +114,15 @@ public class CountriesActivity extends AppCompatActivity implements InteractionL
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         if (getSupportFragmentManager().popBackStackImmediate()) {
             return true;
         }
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

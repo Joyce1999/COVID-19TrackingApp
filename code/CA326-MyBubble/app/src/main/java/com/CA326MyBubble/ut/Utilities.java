@@ -1,4 +1,4 @@
-package com.CA326MyBubble.utils;
+package com.CA326MyBubble.ut;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

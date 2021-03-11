@@ -27,11 +27,11 @@ import com.CA326MyBubble.interfaces.FragListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import static com.CA326MyBubble.utils.Utilities.INTENT;
-import static com.CA326MyBubble.utils.Utilities.LOCATION;
-import static com.CA326MyBubble.utils.Utilities.TYPE;
-import static com.CA326MyBubble.utils.Utilities.SERVER;
-import static com.CA326MyBubble.utils.Utilities.SLIDER_INTENT;
+import static com.CA326MyBubble.ut.Utilities.INTENT;
+import static com.CA326MyBubble.ut.Utilities.LOCATION;
+import static com.CA326MyBubble.ut.Utilities.TYPE;
+import static com.CA326MyBubble.ut.Utilities.SERVER;
+import static com.CA326MyBubble.ut.Utilities.SLIDER_INTENT;
 
 public class MainActivity extends AppCompatActivity implements FragListener {
     private FirebaseAuth mAuth;
@@ -74,7 +74,22 @@ public class MainActivity extends AppCompatActivity implements FragListener {
 
 
         });
+//startScanningButton = (Button) findViewById(R.id.StartScanButton);
+        //startScanningButton.setOnClickListener(new View.OnClickListener() {
+        //  @Override
+        // public void onClick(View view) {
+        //startScanning();
+        // }
+        // });
 
+        //stopScanningButton = (Button) findViewById(R.id.StopScanButton);
+        //stopScanningButton.setOnClickListener(new View.OnClickListener() {
+        //@Override
+        //public void onClick(View v) {
+        //stopScanning();
+        // }
+        //});
+        //stopScanningButton.setVisibility(View.INVISIBLE);
         // Asking for BT permission
         mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
@@ -98,7 +113,27 @@ public class MainActivity extends AppCompatActivity implements FragListener {
             builder.show();
         }
     }
-
+// public void startScanning() {
+    // System.out.println("start scanning");
+    // startScanningButton.setVisibility(View.INVISIBLE);
+    //stopScanningButton.setVisibility(View.VISIBLE);
+    //AsyncTask.execute(new Runnable() {
+    //@Override
+    //public void run() {
+    //scan.onStartCommand();
+    //}
+    ///});
+    //}
+    // public void stopScanning() {
+    // System.out.println("stopping scanning");
+    // startScanningButton.setVisibility(View.VISIBLE);
+    // stopScanningButton.setVisibility(View.INVISIBLE);
+    //AsyncTask.execute(new Runnable() {
+    //@Override
+    /// public void run() {
+    //mBluetoothScanner.stopScan(leScanCallback);
+    // }
+    // });
 
 
 
@@ -163,8 +198,8 @@ public class MainActivity extends AppCompatActivity implements FragListener {
 
     @Override
     public void getNewIntent(newsModel newsModel) {
-        Intent it = new Intent(MainActivity.this, com.CA326MyBubble.activities.NewsDetailsActivity.class);
-        it.putExtra(com.CA326MyBubble.activities.NewsDetailsActivity.PARCELABLE_PARSING_DATA, newsModel);
+        Intent it = new Intent(MainActivity.this, NewsInfoActivity.class);
+        it.putExtra(NewsInfoActivity.PARCELABLE_PARSING_DATA, newsModel);
         startActivity(it);
         overridePendingTransition(0,0);
     }

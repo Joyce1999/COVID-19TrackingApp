@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.utils.Utilities;
+import com.CA326MyBubble.ut.Utilities;
 import com.CA326MyBubble.interfaces.ListenerDetailsForNews;
 
 

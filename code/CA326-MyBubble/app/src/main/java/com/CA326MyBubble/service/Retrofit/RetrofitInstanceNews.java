@@ -2,7 +2,7 @@ package com.CA326MyBubble.service.Retrofit;
 
 import java.util.concurrent.TimeUnit;
 
-import com.CA326MyBubble.utils.Utilities;
+import com.CA326MyBubble.ut.Utilities;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -45,10 +45,10 @@ import com.CA326MyBubble.interfaces.ClickListener;
 import com.CA326MyBubble.listeners.TouchListener;
 import com.CA326MyBubble.model.GlobalCountries;
 
-import static com.CA326MyBubble.utils.Utilities.LOCAL;
-import static com.CA326MyBubble.utils.Utilities.SERVER;
-import static com.CA326MyBubble.utils.Utilities.SETUP;
-import static com.CA326MyBubble.utils.Utilities.NULL_INFO;
+import static com.CA326MyBubble.ut.Utilities.LOCAL;
+import static com.CA326MyBubble.ut.Utilities.SERVER;
+import static com.CA326MyBubble.ut.Utilities.SETUP;
+import static com.CA326MyBubble.ut.Utilities.NULL_INFO;
 
 /**
  * A placeholder fragment containing a simple view.

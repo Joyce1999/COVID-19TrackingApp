@@ -2,9 +2,9 @@ package com.CA326MyBubble.controllers;
 
 import java.util.Calendar;
 
-import static com.CA326MyBubble.utils.Utilities.CONTINENT_URL;
-import static com.CA326MyBubble.utils.Utilities.COUNTRY_URL;
-import static com.CA326MyBubble.utils.Utilities.GLOBE_URL;
+import static com.CA326MyBubble.ut.Utilities.CONTINENT_URL;
+import static com.CA326MyBubble.ut.Utilities.COUNTRY_URL;
+import static com.CA326MyBubble.ut.Utilities.GLOBE_URL;
 
 public class AppUtilsController {
 

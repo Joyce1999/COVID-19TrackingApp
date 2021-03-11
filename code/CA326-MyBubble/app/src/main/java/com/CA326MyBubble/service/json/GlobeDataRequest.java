@@ -23,7 +23,7 @@ import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.model.Summary;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.CA326MyBubble.utils.Utilities.GLOBE_URL;
+import static com.CA326MyBubble.ut.Utilities.GLOBE_URL;
 
 public class GlobeDataRequest {
 

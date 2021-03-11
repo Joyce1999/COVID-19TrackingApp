@@ -6,7 +6,7 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".activities.NewsDetailsActivity">
+    tools:context=".activities.NewsInfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

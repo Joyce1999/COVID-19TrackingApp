@@ -31,7 +31,7 @@
             android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.NewsDetailsActivity"
+            android:name=".activities.NewsInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activities.SliderActivity"

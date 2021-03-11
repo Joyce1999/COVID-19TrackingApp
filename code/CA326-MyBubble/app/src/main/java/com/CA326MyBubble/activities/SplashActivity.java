@@ -11,10 +11,10 @@ import android.os.Handler;
 import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.R;
 
-import static com.CA326MyBubble.utils.Utilities.LOCATION;
-import static com.CA326MyBubble.utils.Utilities.TYPE;
-import static com.CA326MyBubble.utils.Utilities.SETUP;
-import static com.CA326MyBubble.utils.Utilities.COUNTRY;
+import static com.CA326MyBubble.ut.Utilities.LOCATION;
+import static com.CA326MyBubble.ut.Utilities.TYPE;
+import static com.CA326MyBubble.ut.Utilities.SETUP;
+import static com.CA326MyBubble.ut.Utilities.COUNTRY;
 
 
 public class SplashActivity extends AppCompatActivity {

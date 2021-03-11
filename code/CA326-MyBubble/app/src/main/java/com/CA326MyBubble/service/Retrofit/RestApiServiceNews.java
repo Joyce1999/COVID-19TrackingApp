@@ -1,6 +1,6 @@
 package com.CA326MyBubble.service.Retrofit;
 
-import com.CA326MyBubble.utils.Utilities;
+import com.CA326MyBubble.ut.Utilities;
 import com.CA326MyBubble.model.NewsList;
 import retrofit2.Call;
 import retrofit2.http.GET;

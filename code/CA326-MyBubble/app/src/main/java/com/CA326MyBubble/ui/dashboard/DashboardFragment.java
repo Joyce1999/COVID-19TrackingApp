@@ -24,7 +24,7 @@ import com.CA326MyBubble.controllers.AppController;
 import com.CA326MyBubble.R;
 import com.CA326MyBubble.interfaces.FragListener;
 
-import static com.CA326MyBubble.utils.Utilities.INTENT;
+import static com.CA326MyBubble.ut.Utilities.INTENT;
 
 public class DashboardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 

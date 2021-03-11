@@ -20,13 +20,13 @@ import com.CA326MyBubble.interfaces.InteractionListener;
 import com.CA326MyBubble.model.CountrySelection;
 import com.CA326MyBubble.model.GlobalCountries;
 import com.CA326MyBubble.R;
-import com.CA326MyBubble.utils.ThemeController;
+import com.CA326MyBubble.ut.ThemeController;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.CA326MyBubble.utils.Utilities.LOCATION;
-import static com.CA326MyBubble.utils.Utilities.TYPE;
-import static com.CA326MyBubble.utils.Utilities.LOCAL;
-import static com.CA326MyBubble.utils.Utilities.COUNTRY;
+import static com.CA326MyBubble.ut.Utilities.LOCATION;
+import static com.CA326MyBubble.ut.Utilities.TYPE;
+import static com.CA326MyBubble.ut.Utilities.LOCAL;
+import static com.CA326MyBubble.ut.Utilities.COUNTRY;
 
 
 public class SettingsActivity extends AppCompatActivity implements InteractionListener {

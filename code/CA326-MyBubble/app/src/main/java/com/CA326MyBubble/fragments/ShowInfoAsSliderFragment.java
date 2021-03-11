@@ -70,9 +70,9 @@ public class ShowInfoAsSliderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View root = inflater.inflate(R.layout.fragment_slider, container, false);
+        View root = inflater.inflate(R.layout.fragment_slider, container, false);
 
-       // getActivity().getActionBar().setDisplayShowHomeEnabled(false);
+        // getActivity().getActionBar().setDisplayShowHomeEnabled(false);
 
         sViewPager =  root.findViewById(R.id.sViewPager);
         dotsLayout = root.findViewById(R.id.layoutDots);
@@ -132,7 +132,7 @@ public class ShowInfoAsSliderFragment extends Fragment {
         });
 
 
-       return root;
+        return root;
     }
 
 
@@ -247,7 +247,7 @@ public class ShowInfoAsSliderFragment extends Fragment {
 
         return slideModelList;
     }
-// Map of Symptom signs that may mean a person has contracted COVID-19
+    // Map of Symptom signs that may mean a person has contracted COVID-19
     public List<SlideModel> signs()
     {
         List<SlideModel> slideModelList = new ArrayList<>();
@@ -293,7 +293,7 @@ public class ShowInfoAsSliderFragment extends Fragment {
     }
 
 
-// Back button pressed, go to prev
+    // Back button pressed, go to prev
     public void onBackPressed() {
         if (mListener != null) {
             mListener.doOnBackPressed();
