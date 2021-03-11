@@ -57,6 +57,13 @@ public class ScannerService extends Service {
 
     public void onDestroy(){
         isRunning = false;
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                mBluetoothScanner.stopScan(leScanCallback);
+            }
+        });
+        super.onDestroy();
     }
 
     private ScanCallback leScanCallback = new ScanCallback() {
