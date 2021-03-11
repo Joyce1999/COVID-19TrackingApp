@@ -88,7 +88,6 @@ public class SetupActivity extends AppCompatActivity {
                 String mobile = MobileNumber.getText().toString();
                 String address = setupAddress.getText().toString();
                 String gender = setupGender.getText().toString();
-                String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
 
                 if (!TextUtils.isEmpty(user_name)) {
                     String user_id = firebaseAuth.getCurrentUser().getUid();
@@ -97,7 +96,6 @@ public class SetupActivity extends AppCompatActivity {
                     userMap.put("Mobile_Number", mobile);
                     userMap.put("Address", address);
                     userMap.put("Gender", gender);
-                    userMap.put("BT_Add",btAddr);
                     simpleArcLoader.start();
                     simpleArcLoader.setVisibility(View.VISIBLE);
 

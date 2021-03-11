@@ -15,10 +15,20 @@ import android.os.Build;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.CA326MyBubble.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class ScannerService extends Service {
     BluetoothManager mBluetoothManager;
@@ -28,13 +38,32 @@ public class ScannerService extends Service {
 
     public static boolean isRunning = false;
 
+    private FirebaseFirestore firebaseFirestore;
+    private DatabaseReference databaseReference;
+    private ArrayList<String> btAddrs = new ArrayList<String>();
+
     @Override
     public void onCreate() {
+        super.onCreate();
+
         mBluetoothManager=(BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter= mBluetoothManager.getAdapter();
         mBluetoothScanner = mBluetoothAdapter.getBluetoothLeScanner();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        super.onCreate();
+
+        // Adding all bluetooth addresses in Firestore to ArrayList
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = rootRef.collection("Emails");
+        usersRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        btAddrs.add(document.get("BT_Add").toString());
+                    }
+                }
+            }
+        });
     }
 
     @Nullable
@@ -72,12 +101,11 @@ public class ScannerService extends Service {
         public void onScanResult(int callbackType, ScanResult result) {
             // Distance derived from RSSI, measured power and environmental factor. MP and EV fixed constant.
             double distance = Math.pow(10, (1)*((-69.0 - (result.getRssi())) / (20.0)));
-            //if(addresses.contains(result.getDevice().getAddress()))
-            // Test BLE MAC Address to be removed
-            if(result.getDevice().getAddress().equals("BC:7E:8B:BE:7A:85"))
+            // Checking whether device being scanned is a MyBubble User.
+            if(btAddrs.contains(result.getDevice().getAddress())) {
                 // If distance less than 2m send notification, Distance under 0.5 often returned in error.
                 if (distance < 2.0 && distance > 0.5) {
-                    Notification n  = new Notification.Builder(ScannerService.this.getApplicationContext())
+                    Notification n = new Notification.Builder(ScannerService.this.getApplicationContext())
                             .setContentTitle("Social Distance Breach")
                             .setContentText("Contact within" + (Math.round(distance * 100.0) / 100.0) + "metres.")
                             .setSmallIcon(R.drawable.ic_bubble_breach)
@@ -87,6 +115,7 @@ public class ScannerService extends Service {
 
                     notificationManager.notify(0, n);
                 }
+            }
         }
     };
 }

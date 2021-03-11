@@ -1,5 +1,6 @@
 package com.CA326MyBubble.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,7 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.leo.simplearcloader.SimpleArcLoader;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterUser extends AppCompatActivity {
 
@@ -28,8 +33,9 @@ public class RegisterUser extends AppCompatActivity {
     private Button reg_btn;
     private Button reg_login_btn;
     SimpleArcLoader simpleArcLoader;
-
+    Context context = this;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,7 @@ public class RegisterUser extends AppCompatActivity {
         setContentView(R.layout.activity_register_user);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         reg_email_field = (EditText) findViewById(R.id.regEmail);
         reg_pass_field = (EditText) findViewById(R.id.regPassword);
@@ -59,12 +66,25 @@ public class RegisterUser extends AppCompatActivity {
                 String email = reg_email_field.getText().toString();
                 String pass = reg_pass_field.getText().toString();
                 String confirm_pass = reg_conf_pass_field.getText().toString();
+                String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
 
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass) ) {
                     if (pass.equals(confirm_pass)) {
-
+                        Map<String, String> emailsMap = new HashMap<>();
+                        emailsMap.put("BT_Add",btAddr);
                         simpleArcLoader.start();
                         simpleArcLoader.setVisibility(View.VISIBLE);
+
+                        firebaseFirestore.collection("Emails").document(email).set(emailsMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (!task.isSuccessful()) {
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(RegisterUser.this, "(FIRESTORE Error) : " + error, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
                         mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
