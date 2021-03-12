@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginRegBtn;
     private FirebaseAuth mAuth;
     SimpleArcLoader simpleArcLoader;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         loginRegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Working around Android 8 and up's blocking off of BT MAC Address
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     Intent regIntent = new Intent(LoginActivity.this, RegisterUser8.class);
                     startActivity(regIntent);

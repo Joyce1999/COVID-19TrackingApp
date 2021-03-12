@@ -65,6 +65,7 @@ public class RegisterUser extends AppCompatActivity {
                 String email = reg_email_field.getText().toString();
                 String pass = reg_pass_field.getText().toString();
                 String confirm_pass = reg_conf_pass_field.getText().toString();
+                // Getting BT MAC Address in a roundabout way, caused by restrictions on obtaining MAC.
                 String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
 
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass) ) {
