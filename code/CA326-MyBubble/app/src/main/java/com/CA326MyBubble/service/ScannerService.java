@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.CA326MyBubble.R;
+import com.CA326MyBubble.constructors.BubbleArray;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -102,7 +103,7 @@ public class ScannerService extends Service {
             // Distance derived from RSSI, measured power and environmental factor. MP and EV fixed constant.
             double distance = Math.pow(10, (1)*((-69.0 - (result.getRssi())) / (20.0)));
             // Checking whether device being scanned is a MyBubble User.
-            if(btAddrs.contains(result.getDevice().getAddress())) {
+            if(btAddrs.contains(result.getDevice().getAddress()) && !BubbleArray.bubbleAddrs.contains(result.getDevice().getAddress())) {
                 // If distance less than 2m send notification, Distance under 0.5 often returned in error.
                 if (distance < 2.0 && distance > 0.5) {
                     Notification n = new Notification.Builder(ScannerService.this.getApplicationContext())
