@@ -6,6 +6,13 @@
     android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="16dp"
+            android:layout_height="match_parent">
     <TextView
         android:id="@+id/bubbleTitle"
         android:layout_width="wrap_content"
@@ -30,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bubbleTitle"
-        tools:text="\nBefore attending events it is important to register other users within your bubble.\n\nOnce your friend/family member has downloaded and registered on the MyBubble app, simply enter their email address into the text box below and click the register button.\nYou can add as many users as you like to your bubble.\n\nOnce registered, you will only receive notifications when those outside your social bubble come within 2 metres.\nStay Safe and Enjoy!"/>
+        android:text="@string/bubble_desc"/>
 
     <ImageView
         android:id="@+id/imageView4"
@@ -72,5 +79,6 @@
         app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bubbleEmail" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

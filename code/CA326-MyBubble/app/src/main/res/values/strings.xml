@@ -10,6 +10,9 @@
     <string name="title_dashboard">Dashboard</string>
 
     <string name="title_activity_settings">Settings</string>
+    <string name="title_bubble">Social Bubble</string>
+
+    <string name="bubble_desc">\nBefore attending events it is important to register other users within your bubble.\n\nOnce your friend/family member has downloaded and registered on the MyBubble app, simply enter their email address into the text box below and click the register button.\nYou can add as many users as you like to your bubble.\n\nOnce registered, you will only receive notifications when those outside your social bubble come within 2 metres.\nStay Safe and Enjoy!</string>
 
     <!-- Preference Titles -->
     <string name="location_header">Location</string>

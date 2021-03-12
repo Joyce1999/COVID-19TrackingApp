@@ -17,7 +17,7 @@
         android:title="@string/title_news" />
 
     <item
-        android:id="@+id/navigation_social"
+        android:id="@+id/navigation_bubble"
         android:icon="@drawable/meterapart"
         android:title="@string/title_social" />
 </menu>
