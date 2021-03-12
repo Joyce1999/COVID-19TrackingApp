@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">BLETest</string>
-    <string name="button1">Scan</string>
-    <string name="button2">Stop Scanning</string>
-</resources>
