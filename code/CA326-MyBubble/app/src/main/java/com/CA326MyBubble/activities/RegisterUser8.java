@@ -1,5 +1,6 @@
 package com.CA326MyBubble.activities;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,25 +22,27 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leo.simplearcloader.SimpleArcLoader;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterUser extends AppCompatActivity {
+public class RegisterUser8 extends AppCompatActivity {
 
     private EditText reg_email_field;
     private EditText reg_pass_field;
     private EditText reg_conf_pass_field;
+    private EditText reg_mac_field;
     private Button reg_btn;
     private Button reg_login_btn;
     SimpleArcLoader simpleArcLoader;
-    Context context = this;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_user);
+        setContentView(R.layout.activity_register_user_8);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -47,13 +50,14 @@ public class RegisterUser extends AppCompatActivity {
         reg_email_field = (EditText) findViewById(R.id.regEmail);
         reg_pass_field = (EditText) findViewById(R.id.regPassword);
         reg_conf_pass_field = (EditText) findViewById(R.id.regPasswordconf);
+        reg_mac_field = (EditText) findViewById(R.id.regMac);
         reg_btn = (Button) findViewById(R.id.button_reg);
         reg_login_btn = (Button) findViewById(R.id.button_login);
         simpleArcLoader = findViewById(R.id.loader);
         reg_login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(RegisterUser.this, LoginActivity.class);
+                Intent loginIntent = new Intent(RegisterUser8.this, LoginActivity.class);
                 startActivity(loginIntent);
             }
         });
@@ -65,7 +69,7 @@ public class RegisterUser extends AppCompatActivity {
                 String email = reg_email_field.getText().toString();
                 String pass = reg_pass_field.getText().toString();
                 String confirm_pass = reg_conf_pass_field.getText().toString();
-                String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
+                String btAddr = reg_mac_field.getText().toString();
 
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass) ) {
                     if (pass.equals(confirm_pass)) {
@@ -79,7 +83,7 @@ public class RegisterUser extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (!task.isSuccessful()) {
                                     String error = task.getException().getMessage();
-                                    Toast.makeText(RegisterUser.this, "(FIRESTORE Error) : " + error, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterUser8.this, "(FIRESTORE Error) : " + error, Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -88,19 +92,19 @@ public class RegisterUser extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) {
-                                    Intent setupIntent = new Intent(RegisterUser.this, SetupActivity.class);
+                                    Intent setupIntent = new Intent(RegisterUser8.this, SetupActivity.class);
                                     startActivity(setupIntent);
                                     finish();
 
                                 } else {
                                     String errorMessage = task.getException().getMessage();
-                                    Toast.makeText(RegisterUser.this, "Error: " + errorMessage, Toast.LENGTH_LONG);
+                                    Toast.makeText(RegisterUser8.this, "Error: " + errorMessage, Toast.LENGTH_LONG);
                                 }
                                 simpleArcLoader.setVisibility(View.INVISIBLE);
                             }
                         });
                     } else {
-                        Toast.makeText(RegisterUser.this, "Password does not match", Toast.LENGTH_LONG);
+                        Toast.makeText(RegisterUser8.this, "Password does not match", Toast.LENGTH_LONG);
                     }
                 }
             }
@@ -118,7 +122,7 @@ public class RegisterUser extends AppCompatActivity {
     }
 
     private void sendToMain() {
-        Intent mainIntent = new Intent(RegisterUser.this, MainActivity.class);
+        Intent mainIntent = new Intent(RegisterUser8.this, MainActivity.class);
         startActivity(mainIntent);
         finish();
     }

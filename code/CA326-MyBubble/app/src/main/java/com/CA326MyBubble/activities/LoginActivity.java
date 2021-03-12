@@ -43,9 +43,16 @@ public class LoginActivity extends AppCompatActivity {
         loginRegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent regIntent = new Intent(LoginActivity.this, RegisterUser.class);
-                startActivity(regIntent);
-                finish();
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    Intent regIntent = new Intent(LoginActivity.this, RegisterUser8.class);
+                    startActivity(regIntent);
+                    finish();
+                }
+                else {
+                    Intent regIntent = new Intent(LoginActivity.this, RegisterUser.class);
+                    startActivity(regIntent);
+                    finish();
+                }
             }
         });
 
