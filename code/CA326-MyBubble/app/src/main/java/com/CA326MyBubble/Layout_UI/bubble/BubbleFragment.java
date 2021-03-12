@@ -63,6 +63,7 @@ public class BubbleFragment extends Fragment {
                                 if (document.exists()) {
                                     String bubbleAddr = document.get("BT_Add").toString();
                                     BubbleArray.bubbleAddrs.add(bubbleAddr);
+                                    Toast.makeText(root.getContext(), "Success!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(root.getContext(), "Error: There is no user associated with this email address", Toast.LENGTH_SHORT).show();
                                 }
