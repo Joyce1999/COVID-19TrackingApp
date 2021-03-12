@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.le.AdvertisingSet;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +13,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.CA326MyBubble.App_Constructors.AddrsArray;
 import com.CA326MyBubble.Layout_Models.newsModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -26,6 +31,10 @@ import com.CA326MyBubble.R;
 import com.CA326MyBubble.App_Interfaces.FragListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import static com.CA326MyBubble.App_Utilities.Utilities.INTENT;
 import static com.CA326MyBubble.App_Utilities.Utilities.LOCATION;
@@ -35,6 +44,8 @@ import static com.CA326MyBubble.App_Utilities.Utilities.SLIDER_INTENT;
 
 public class MainActivity extends AppCompatActivity implements FragListener {
     private FirebaseAuth mAuth;
+    public static final String LOG_TAG = "Tag: ";
+    AdvertisingSet currentAdvertisingSet;
 
     // BT used for gaining permissions before starting ScannerService
     BluetoothManager mBluetoothManager;
@@ -52,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements FragListener {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -97,6 +107,19 @@ public class MainActivity extends AppCompatActivity implements FragListener {
             });
             builder.show();
         }
+        // Adding all BT MAC Addresses to an ArrayList to be used elsewhere
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = rootRef.collection("Emails");
+        usersRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        AddrsArray.btAddrs.add(document.get("BT_Add").toString());
+                    }
+                }
+            }
+        });
     }
 
 
@@ -174,5 +197,4 @@ public class MainActivity extends AppCompatActivity implements FragListener {
         super.onBackPressed();
 
     }
-
 }

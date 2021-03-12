@@ -33,7 +33,7 @@ public class BubbleFragment extends Fragment {
     private EditText emailField;
     private TextView bubbleDescription;
     private Button bubbleButton;
-    private Button leaveBubble;
+    private Button clearBubble;
 
     private FirebaseFirestore db;
 
@@ -44,9 +44,8 @@ public class BubbleFragment extends Fragment {
         emailField = (EditText) root.findViewById(R.id.bubbleEmail);
         bubbleButton = (Button) root.findViewById(R.id.bubbleButton);
         bubbleDescription = (TextView) root.findViewById(R.id.bubbleDescription);
-        //leaveBubble = (Button) root.findViewById(R.id.leaveBubble);
+        clearBubble = (Button) root.findViewById(R.id.clearBubble);
 
-        ArrayList<String> bubbleList = new ArrayList<String>();
 
         bubbleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,14 +76,13 @@ public class BubbleFragment extends Fragment {
             }
         });
 
-        //leaveBubble.setOnClickListener(new View.OnClickListener() {
-        //@Override
-        //public void onClick(View view) {
-        //Intent mainIntent = new Intent(BubbleFragment.this, MainActivity.class);
-        //startActivity(mainIntent);
-        //finish();
-        //}
-        //});
+        clearBubble.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BubbleArray.bubbleAddrs.clear();
+                Toast.makeText(getContext(),"Bubble Cleared!",Toast.LENGTH_SHORT).show();
+        }
+        });
         return root;
     }
 }

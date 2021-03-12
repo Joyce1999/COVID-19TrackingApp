@@ -133,5 +133,8 @@ and how best to keep safe-->
 
     <string name="button1">Scan for Close Contacts</string>
     <string name="button2">Stop Scanning</string>
+    
+    <string name="channel_name">SDB Channel</string>
+    <string name="channel_description">Used to notify users of potential social distancing breaches.</string>
 
 </resources>

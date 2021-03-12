@@ -1,7 +1,9 @@
 package com.CA326MyBubble.App_Services;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -10,25 +12,23 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.provider.Settings;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import com.CA326MyBubble.App_Activities.MainActivity;
+import com.CA326MyBubble.App_Constructors.AddrsArray;
+import com.CA326MyBubble.App_Utilities.NotificationHelper;
 import com.CA326MyBubble.R;
 import com.CA326MyBubble.App_Constructors.BubbleArray;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 
 public class ScannerService extends Service {
     BluetoothManager mBluetoothManager;
@@ -38,10 +38,6 @@ public class ScannerService extends Service {
 
     public static boolean isRunning = false;
 
-    private FirebaseFirestore firebaseFirestore;
-    private DatabaseReference databaseReference;
-    private ArrayList<String> btAddrs = new ArrayList<String>();
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -50,20 +46,7 @@ public class ScannerService extends Service {
         mBluetoothAdapter= mBluetoothManager.getAdapter();
         mBluetoothScanner = mBluetoothAdapter.getBluetoothLeScanner();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        // Adding all bluetooth addresses in Firestore to ArrayList
-        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = rootRef.collection("Emails");
-        usersRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        btAddrs.add(document.get("BT_Add").toString());
-                    }
-                }
-            }
-        });
+        Toast.makeText(getApplicationContext(),"Initialising Scanner", Toast.LENGTH_LONG).show();
     }
 
     @Nullable
@@ -98,24 +81,59 @@ public class ScannerService extends Service {
     private ScanCallback leScanCallback = new ScanCallback() {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
-        public void onScanResult(int callbackType, ScanResult result) {
+        public void onScanResult(int CALLBACK_TYPE_ALL_MATCHES, ScanResult result) {
             // Distance derived from RSSI, measured power and environmental factor. MP and EV fixed constant.
             double distance = Math.pow(10, (1)*((-69.0 - (result.getRssi())) / (20.0)));
             // Checking whether device being scanned is a MyBubble User.
-            if(btAddrs.contains(result.getDevice().getAddress()) && !BubbleArray.bubbleAddrs.contains(result.getDevice().getAddress())) {
+            if(AddrsArray.btAddrs.contains(result.getDevice().getAddress()) && !BubbleArray.bubbleAddrs.contains(result.getDevice().getAddress())) {
                 // If distance less than 2m send notification, Distance under 0.5 often returned in error.
                 if (distance < 2.0 && distance > 0.5) {
-                    Notification n = new Notification.Builder(ScannerService.this.getApplicationContext())
-                            .setContentTitle("Social Distance Breach")
-                            .setContentText("Contact within" + (Math.round(distance * 100.0) / 100.0) + "metres.")
-                            .setSmallIcon(R.drawable.ic_bubble_breach)
-                            .setAutoCancel(true).build();
-                    NotificationManager notificationManager =
-                            (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                    notificationManager.notify(0, n);
+                    createNotification("Social Distancing Breach", "Please maintain a distance of at least 2 metres from those not in your bubble.");
                 }
             }
         }
     };
+
+    private Context mContext = this;
+    private NotificationManager mNotificationManager;
+    private NotificationCompat.Builder mBuilder;
+    public static final String NOTIFICATION_CHANNEL_ID = "10001";
+
+    public void createNotification(String title, String message)
+    {
+        /**Creates an explicit intent for an Activity in your app**/
+        Intent resultIntent = new Intent(mContext , MainActivity.class);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,
+                0 /* Request code */, resultIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mBuilder = new NotificationCompat.Builder(mContext);
+        mBuilder.setSmallIcon(R.drawable.ic_bubble_breach);
+        mBuilder.setContentTitle(title)
+                .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
+                .setAutoCancel(false)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setContentIntent(resultPendingIntent);
+
+        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            assert mNotificationManager != null;
+            mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
+            mNotificationManager.createNotificationChannel(notificationChannel);
+        }
+        assert mNotificationManager != null;
+        mNotificationManager.notify(0 /* Request Code */, mBuilder.build());
+    }
 }
