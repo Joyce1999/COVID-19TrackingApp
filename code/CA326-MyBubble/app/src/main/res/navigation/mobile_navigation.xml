@@ -6,21 +6,27 @@
     app:startDestination="@id/navigation_dashboard">
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.CA326MyBubble.ui.dashboard.DashboardFragment"
+        android:name="com.CA326MyBubble.Layout_UI.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
 
     <fragment
         android:id="@+id/navigation_info"
-        android:name="com.CA326MyBubble.ui.info.InfoFragment"
+        android:name="com.CA326MyBubble.Layout_UI.info.InfoFragment"
         android:label="@string/title_info"
         tools:layout="@layout/fragment_info" />
 
     <fragment
         android:id="@+id/navigation_news"
-        android:name="com.CA326MyBubble.ui.news.FragmentNews"
+        android:name="com.CA326MyBubble.Layout_UI.news.FragmentNews"
         android:label="@string/title_news"
         tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/navigation_bubble"
+        android:name="com.CA326MyBubble.Layout_UI.bubble.BubbleFragment"
+        android:label="@string/title_bubble"
+        tools:layout="@layout/fragment_bubble" />
 
 </navigation>

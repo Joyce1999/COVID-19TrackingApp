@@ -36,7 +36,7 @@
                     android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioFilter">
+                    app:layout_constraintTop_toBottomOf="@+id/FilterView">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cvTested"
@@ -127,7 +127,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:id="@+id/cardViewSigns"
+                        android:id="@+id/CVSigns"
                         android:layout_height="wrap_content"
                         style="@style/CustomCardView"
                         android:layout_margin="7dp"
@@ -370,7 +370,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tvLastUpdated"
+                    android:id="@+id/lastUpdated"
                     style="@style/LabelFontStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -393,13 +393,13 @@
                     android:textAlignment="center"
                     android:layout_marginTop="5sp"
                     android:text="@string/connect_to_internet"
-                    app:layout_constraintEnd_toStartOf="@+id/tvLastUpdated"
-                    app:layout_constraintStart_toEndOf="@id/tvLastUpdated"
-                    app:layout_constraintTop_toBottomOf="@id/tvLastUpdated"
+                    app:layout_constraintEnd_toStartOf="@+id/lastUpdated"
+                    app:layout_constraintStart_toEndOf="@id/lastUpdated"
+                    app:layout_constraintTop_toBottomOf="@id/lastUpdated"
                     />
 
                 <ProgressBar
-                    android:id="@+id/progress_circular_home"
+                    android:id="@+id/Progress_Bar_Home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -415,14 +415,14 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radioFilter"
+                    android:id="@+id/FilterView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLastUpdated">
+                    app:layout_constraintTop_toBottomOf="@+id/lastUpdated">
 
 
                     <androidx.appcompat.widget.AppCompatRadioButton
