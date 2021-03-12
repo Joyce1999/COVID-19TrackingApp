@@ -1,5 +1,6 @@
 package com.CA326MyBubble.activities;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leo.simplearcloader.SimpleArcLoader;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +69,8 @@ public class RegisterUser extends AppCompatActivity {
                 String email = reg_email_field.getText().toString();
                 String pass = reg_pass_field.getText().toString();
                 String confirm_pass = reg_conf_pass_field.getText().toString();
-                String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
+                //String btAddr = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
+                String btAddr = getBluetoothMacAddress();
 
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass) ) {
                     if (pass.equals(confirm_pass)) {
@@ -122,5 +126,33 @@ public class RegisterUser extends AppCompatActivity {
         Intent mainIntent = new Intent(RegisterUser.this, MainActivity.class);
         startActivity(mainIntent);
         finish();
+    }
+
+    private String getBluetoothMacAddress() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        String bluetoothMacAddress = "";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
+            try {
+                Field mServiceField = bluetoothAdapter.getClass().getDeclaredField("mService");
+                mServiceField.setAccessible(true);
+
+                Object btManagerService = mServiceField.get(bluetoothAdapter);
+
+                if (btManagerService != null) {
+                    bluetoothMacAddress = (String) btManagerService.getClass().getMethod("getAddress").invoke(btManagerService);
+                }
+            } catch (NoSuchFieldException e) {
+
+            } catch (NoSuchMethodException e) {
+
+            } catch (IllegalAccessException e) {
+
+            } catch (InvocationTargetException e) {
+
+            }
+        } else {
+            bluetoothMacAddress = bluetoothAdapter.getAddress();
+        }
+        return bluetoothMacAddress;
     }
 }
